@@ -1,0 +1,27 @@
+.card {
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 1rem;
+  flex-wrap: wrap;
+  height: 100%;
+  &-body {
+  }
+
+  &-title {
+    margin: 1rem;
+  }
+
+  &-actions {
+    margin-top: 2rem;
+    .btn {
+      background: #4198f2;
+      border: none;
+      padding: 0.6rem;
+    }
+    a {
+      text-decoration: none;
+      color: #ffff;
+    }
+  }
+}

@@ -16,11 +16,12 @@ export class MoviesComponent implements OnInit {
   topRatedMovies$: Observable<Array<Movie>>;
 
   ngOnInit() {
+    this._movieService.getKey().subscribe();
     this.popularMovies$ = this._movieService
       .getPopularMovies()
       .pipe(map(movies => movies.slice(0, 5)));
-    this.topRatedMovies$ = this._movieService
-      .getTopRatedMovies()
-      .pipe(map(movies => movies.slice(0, 5)));
+    // this.topRatedMovies$ = this._movieService
+    //   .getTopRatedMovies()
+    //   .pipe(map(movies => movies.slice(0, 5)));
   }
 }

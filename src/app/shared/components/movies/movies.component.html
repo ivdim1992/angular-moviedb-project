@@ -1,4 +1,10 @@
-<h2>Popular Movies</h2>
-<moviedb-list-movie [movies]="popularMovies$ | async"></moviedb-list-movie>
-<h2>Top Rated Movies</h2>
-<moviedb-list-movie [movies]="topRatedMovies$ | async"></moviedb-list-movie>
+<div class="container">
+  <section class="popular-movies">
+    <h2 class="movies-header">Popular Movies</h2>
+    <moviedb-list-movie [movies]="popularMovies$ | async"></moviedb-list-movie>
+  </section>
+  <section class="top-rated-movies">
+    <h2 class="movies-header">Top Rated Movies</h2>
+    <moviedb-list-movie [movies]="topRatedMovies$ | async"></moviedb-list-movie>
+  </section>
+</div>

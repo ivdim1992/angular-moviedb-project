@@ -1,15 +1,28 @@
-<div class="card" style="width: 15rem;">
-  <img
-    alt="Card image cap"
-    class="card-img-top"
-    src="https://image.tmdb.org/t/p/w185{{ movie.imagePath }}"
-  />
-  <div class="card-body">
-    <h4 class="card-title">{{ movie.title }}</h4>
+<!-- <div class="card" style="width: 15rem;" role="list" fxLayout="columns" fxLayoutGap="32px">
+    <img alt="Card image cap" class="card-img-top" src="https://image.tmdb.org/t/p/w185{{ movie.imagePath }}" />
+    <div class="card-body">
+      <h4 class="card-title">{{ movie.title }}</h4>
+    </div>
+    <div class="card-actions">
+      <button class="btn" type="button">
+        <a href="#">View Details</a>
+      </button>
+    </div>
   </div>
-  <div class="card-actions">
+   -->
+<mat-card class="movie-card">
+  <mat-card-header>
+    <mat-card-title>{{ movie.title }}</mat-card-title>
+  </mat-card-header>
+  <img src="https://image.tmdb.org/t/p/w154{{ movie.imagePath }}" alt="movie" />
+  <mat-card-content>
+    <p>
+      Genres:
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
     <button class="btn" type="button">
       <a href="#">View Details</a>
     </button>
-  </div>
-</div>
+  </mat-card-actions>
+</mat-card>

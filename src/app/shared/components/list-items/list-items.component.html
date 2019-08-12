@@ -1,0 +1,5 @@
+<div class="movies-container" fxLayout="row" fxLayoutAlign="space-evenly center">
+  <div *ngFor="let item of items">
+    <moviedb-movie-card [movie]="item"></moviedb-movie-card>
+  </div>
+</div>

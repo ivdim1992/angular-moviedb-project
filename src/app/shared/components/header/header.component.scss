@@ -1,0 +1,11 @@
+.toolbar {
+  &__row {
+    padding: 0 1.5rem;
+    &-logo {
+      margin-left: 1rem;
+    }
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+  }
+}

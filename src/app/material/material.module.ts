@@ -1,41 +1,54 @@
 import { NgModule } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+import { MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
 
-import { MatButtonModule } from '@angular/material/button';
+// components
+import { MaterialSnackbar } from './components/material-snackbar/material-snackbar.component';
+import { MatIconComponent } from './components/mat-icon/mat-icon.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatOptionModule } from '@angular/material/core';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
-import { MatSelectModule } from '@angular/material/select';
-import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
+
+import { FormsModule } from '@angular/forms';
 
 const modules = [
+  MatListModule,
+  MatSidenavModule,
+  MatButtonModule,
   MatInputModule,
   MatFormFieldModule,
-  MatRadioModule,
+  MatToolbarModule,
   MatSelectModule,
-  MatOptionModule,
-  MatCheckboxModule,
-  MatDialogModule,
-  MatButtonModule,
+  MatIconModule,
   MatSnackBarModule,
-  MatProgressSpinnerModule
+  MatMenuModule,
+  MatCardModule,
+  // MatRadioModule,
+  // MatOptionModule,
+  // MatCheckboxModule,
+  MatDialogModule,
+  // MatProgressSpinnerModule
 ];
 
 @NgModule({
+  declarations: [MaterialSnackbar, MatIconComponent],
   imports: modules,
-  exports: modules,
+  exports: [...modules, MaterialSnackbar, MatIconComponent],
   providers: [
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {
-        duration: 5000,
+        duration: 3000,
         verticalPosition: 'top',
-        panelClass: ['epu-snackbar']
+        panelClass: ['moviedb-']
       }
     }
   ]
 })
-export class MaterialSharedModule {}
+export class MaterialSharedModule { }

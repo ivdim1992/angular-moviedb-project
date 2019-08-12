@@ -1,0 +1,9 @@
+<mat-form-field>
+  <input matInput placeholder="First Name" #firstName />
+</mat-form-field>
+
+<mat-form-field>
+  <input matInput placeholder="Last Name" #lastName />
+</mat-form-field>
+
+<button mat-button (click)="openSnackBar(firstName.value, lastName.value)">Register</button>

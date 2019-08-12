@@ -7,23 +7,38 @@ import {
 
 // import { MaterialSharedModule } from '../material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+// MOVIES and HOME
 import { MovieService } from './services/movie.service';
 import { HomeComponent } from './components/home/home.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { HttpClientModule } from '@angular/common/http';
-import { ListMovieComponent } from './components/list-movie/list-movie.component';
 import { MoviesComponent } from './components/movies/movies.component';
 import { MovieCardComponent } from './components/movie-card/movie-card.component';
+import { MaterialSharedModule } from '../material/material.module';
+import { FormsModule } from '@angular/forms';
+import { ListItemComponent } from './components/list-items/list-items.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { AppRoutingModule } from '../app-routing.module';
 
 @NgModule({
   declarations: [
     HomeComponent,
     FooterComponent,
     MoviesComponent,
-    ListMovieComponent,
-    MovieCardComponent
+    MovieCardComponent,
+    ListItemComponent,
+    HeaderComponent
+
   ],
-  imports: [BrowserModule, HttpClientModule],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    MaterialSharedModule,
+    FormsModule,
+    FlexLayoutModule,
+    AppRoutingModule
+  ],
   providers: [MovieService],
   exports: [HomeComponent, FooterComponent]
 })

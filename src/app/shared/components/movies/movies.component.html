@@ -1,11 +1,16 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav-content>
     <section class="sidenav-container__popular-movies">
-      <h3 mat-subheader class="sidenav-container__popular-movies-header">Popular Movies</h3>
+      <a [routerLink]="['/', 'movies', 'popular-movies']">
+        <h3 mat-subheader class="sidenav-container__popular-movies-header">Popular Movies</h3>
+      </a>
       <moviedb-list-items [items]="popularMovies$ | async"></moviedb-list-items>
     </section>
     <section class="sidenav-container__top-rated-movies">
-      <h3 mat-subheader class="sidenav-container__top-rated-movies-header">Top Rated Movies</h3>
-      <moviedb-list-items [items]="topRatedMovies$ | async"></moviedb-list-items></section
-  ></mat-sidenav-content>
+      <a [routerLink]="['/', 'movies', 'top-rated-movies']">
+        <h3 mat-subheader class="sidenav-container__top-rated-movies-header">Top Rated Movies</h3>
+      </a>
+      <moviedb-list-items [items]="topRatedMovies$ | async"></moviedb-list-items>
+    </section>
+  </mat-sidenav-content>
 </mat-sidenav-container>

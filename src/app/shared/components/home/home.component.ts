@@ -8,14 +8,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  appTheme = 'default';
+  constructor() {}
 
-  constructor(private overlayContainer: OverlayContainer) { }
-
-  ngOnInit() {
-  }
-
-  switchTheme(appTheme: string) {
-    this.appTheme = appTheme;
-  }
+  ngOnInit() {}
 }

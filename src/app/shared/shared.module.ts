@@ -1,10 +1,5 @@
-import {
-  NgModule,
-  Optional,
-  SkipSelf,
-  ModuleWithProviders
-} from '@angular/core';
-
+import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
+import { CommonModule } from '@angular/common';
 // import { MaterialSharedModule } from '../material/material.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
@@ -19,7 +14,12 @@ import { FormsModule } from '@angular/forms';
 import { ListItemComponent } from './components/list-items/list-items.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { TopRatedMoviesComponent } from './components/top-rated-movies/top-rated-movies.component';
+import { PopularMoviesComponent } from './components/popular-movies/popular-movies.component';
+import { SharedRoutingModule } from './shared-routing.module';
+import { AppModule } from '../app.module';
 import { AppRoutingModule } from '../app-routing.module';
+import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 
 @NgModule({
   declarations: [
@@ -28,19 +28,15 @@ import { AppRoutingModule } from '../app-routing.module';
     MoviesComponent,
     MovieCardComponent,
     ListItemComponent,
-    HeaderComponent
-
+    HeaderComponent,
+    TopRatedMoviesComponent,
+    PopularMoviesComponent,
+    MovieDetailsComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    MaterialSharedModule,
-    FormsModule,
-    FlexLayoutModule,
-    AppRoutingModule
-  ],
+  imports: [HttpClientModule, MaterialSharedModule, FormsModule, FlexLayoutModule, SharedRoutingModule, CommonModule],
   providers: [MovieService],
-  exports: [HomeComponent, FooterComponent]
+  exports: [HomeComponent, FooterComponent, HeaderComponent, MovieDetailsComponent, MovieCardComponent],
+  entryComponents: [MovieDetailsComponent]
 })
 export class SharedModule {
   //   constructor(

@@ -5,9 +5,14 @@ import { TopRatedMoviesComponent } from './shared/components/top-rated-movies/to
 import { PopularMoviesComponent } from './shared/components/popular-movies/popular-movies.component';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
   { path: 'home', component: HomeComponent },
-  { path: 'movies', loadChildren: '../app/shared/shared.module#SharedModule' }
+  { path: 'movies', loadChildren: '../app/shared/shared.module#SharedModule' },
+  { path: 'login', loadChildren: '../app/login/login.module#LoginModule' },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'home'
+  }
 ];
 
 @NgModule({

@@ -13,3 +13,7 @@ $theme-accent: mat-palette($mat-blue-grey, 400);
 $theme-warn: mat-palette($mat-red, 500);
 
 $theme-black-theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
+
+.app-default-theme {
+  @include angular-material-theme($theme-black-theme);
+}

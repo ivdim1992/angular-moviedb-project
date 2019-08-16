@@ -22,7 +22,7 @@ export class MovieDetailsComponent implements OnInit {
   ) {}
   private _destroyed$ = new Subject<boolean>();
   movieGenres: any[];
-  movieDetails;
+  movieDetails: any;
 
   ngOnInit() {
     this._movieService

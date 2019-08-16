@@ -1,7 +1,6 @@
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { MaterialSharedModule } from '../material/material.module';
-import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 // MOVIES and HOME
 import { MovieService } from './services/movie.service';
@@ -17,9 +16,10 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { TopRatedMoviesComponent } from './components/top-rated-movies/top-rated-movies.component';
 import { PopularMoviesComponent } from './components/popular-movies/popular-movies.component';
 import { SharedRoutingModule } from './shared-routing.module';
-import { AppModule } from '../app.module';
-import { AppRoutingModule } from '../app-routing.module';
+
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { SnackBarService } from './services/snack-bar.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,16 @@ import { MovieDetailsComponent } from './components/movie-details/movie-details.
     MovieDetailsComponent
   ],
   imports: [HttpClientModule, MaterialSharedModule, FormsModule, FlexLayoutModule, SharedRoutingModule, CommonModule],
-  providers: [MovieService],
-  exports: [HomeComponent, FooterComponent, HeaderComponent, MovieDetailsComponent, MovieCardComponent],
+  providers: [MovieService, SnackBarService],
+  exports: [
+    HomeComponent,
+    FooterComponent,
+    HeaderComponent,
+    MovieDetailsComponent,
+    MovieCardComponent,
+    FlexLayoutModule,
+    MaterialSharedModule
+  ],
   entryComponents: [MovieDetailsComponent]
 })
 export class SharedModule {

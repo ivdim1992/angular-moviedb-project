@@ -6,16 +6,18 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 
 // FIREBASE
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
-// import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFireDatabaseModule } from 'angularfire2/database';
+// import { AngularFireStorageModule } from '@angular/fire/storage';
 import { environment } from 'src/environments/environment.prod';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialSharedModule } from './material/material.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
 
-const modules = [AngularFirestoreModule, AngularFireAuthModule]
-
+// const modules = [AngularFireAuthModule];
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,12 +26,13 @@ const modules = [AngularFirestoreModule, AngularFireAuthModule]
     AppRoutingModule,
     SharedModule,
     AngularFireModule.initializeApp(environment.firebase, 'moviedb-project'),
-    modules,
+    AngularFireAuthModule,
+    // ...modules,
     NoopAnimationsModule,
     MaterialSharedModule
   ],
-  providers: [],
-  exports: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  exports: [AngularFireAuthModule],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

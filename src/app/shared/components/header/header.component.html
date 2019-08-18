@@ -5,16 +5,15 @@
         <moviedb-mat-icon></moviedb-mat-icon>
       </a>
     </span>
-    {{ currentUser.email }}
     <span class="toolbar__row-logo">movieDB</span>
     <span class="example-spacer"></span>
-    <div *ngIf="isLoggedIn && currentUser">
-      <span class="toolbar__row-welcome-user">Welcome, {{ currentUser.email }}!</span>
+    <div *ngIf="userEmail">
+      <span class="toolbar__row-welcome-user">Welcome, {{ userEmail }}!</span>
       <span>
         <a (click)="logoutUser()">Logout</a>
       </span>
     </div>
-    <span *ngIf="!isLoggedIn">
+    <span *ngIf="!userEmail">
       <a [routerLink]="['/login']">Login</a>
     </span>
   </mat-toolbar-row>

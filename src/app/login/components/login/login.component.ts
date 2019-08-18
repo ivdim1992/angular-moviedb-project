@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     private _authService: AuthService,
     private _snackBar: SnackBarService,
     private _route: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
@@ -29,11 +29,13 @@ export class LoginComponent implements OnInit {
     if (this.formGroup.invalid) {
       return;
     }
+
     const { email, password } = values;
+
     this._authService
       .login(email, password)
       .then(user => {
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('email', user.user.email)
         this._snackBar.open({
           message: 'Log in successfuly!'
         });

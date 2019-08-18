@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
+import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,30 +13,33 @@ import { first } from 'rxjs/operators';
 export class AuthService {
   isAuthenticated$ = new BehaviorSubject<boolean>(false);
 
-  constructor(public _afAuth: AngularFireAuth, public _router: Router) {
-    const authenticated = !!localStorage.getItem('user');
-    this.isAuthenticated$.next(authenticated);
-  }
+  constructor(public _afAuth: AngularFireAuth, public _router: Router, private _snackBar: SnackBarService) { }
 
-  getCurrentUser(): Observable<User> {
+  fetchCurrentUser(): Observable<User> {
     return this._afAuth.authState;
   }
 
-  login(email: string, password: string) {
+  login(name: string, password: string) {
     this.isAuthenticated$.next(true);
-    return this._afAuth.auth.signInWithEmailAndPassword(email, password);
+    return this._afAuth.auth.signInWithEmailAndPassword(name, password);
   }
 
-  public getToken(): string {
-    let token: string;
-    this._afAuth.idToken.subscribe(idToken => (token = idToken));
-    return token;
+  getToken(): Observable<string> {
+    return this._afAuth.idToken;
   }
 
   logout() {
-    this._afAuth.auth.signOut();
-    this.isAuthenticated$.next(false);
-    localStorage.removeItem('user');
-    this._router.navigate(['login']);
+    this._afAuth.auth.signOut().then(_ => {
+      this.isAuthenticated$.next(false);
+      localStorage.removeItem('email');
+      this._router.navigate(['/']);
+      this._snackBar.open({
+        message: 'Logout successfuly!',
+      });
+    }).catch(err => {
+      this._snackBar.open({
+        message: 'We are having troubles logging you out!'
+      });
+    });
   }
 }

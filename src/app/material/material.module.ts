@@ -40,15 +40,6 @@ const modules = [
   declarations: [MaterialSnackbar, MatIconComponent],
   imports: modules,
   exports: [...modules, MaterialSnackbar, MatIconComponent],
-  providers: [
-    {
-      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
-      useValue: {
-        duration: 3000,
-        verticalPosition: 'top',
-        panelClass: ['moviedb-']
-      }
-    }
-  ]
+  providers: []
 })
 export class MaterialSharedModule { }

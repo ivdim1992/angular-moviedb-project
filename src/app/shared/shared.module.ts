@@ -20,6 +20,7 @@ import { SharedRoutingModule } from './shared-routing.module';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { SnackBarService } from './services/snack-bar.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
     MovieDetailsComponent
   ],
   imports: [HttpClientModule, MaterialSharedModule, FormsModule, FlexLayoutModule, SharedRoutingModule, CommonModule],
-  providers: [MovieService, SnackBarService],
+  providers: [MovieService, SnackBarService, AuthGuard],
   exports: [
     HomeComponent,
     FooterComponent,

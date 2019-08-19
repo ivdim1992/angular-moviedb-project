@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
     private _authService: AuthService,
     private _snackBar: SnackBarService,
     private _route: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
     this._authService
       .login(email, password)
       .then(user => {
-        localStorage.setItem('email', user.user.email)
+        localStorage.setItem('email', user.user.email);
         this._snackBar.open({
           message: 'Log in successfuly!'
         });

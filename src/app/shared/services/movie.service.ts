@@ -13,7 +13,6 @@ export class MovieService {
 
   getPopularMovies(): Observable<Movie[]> {
     const url = `${movieDB.BASE_URL}popular?api_key=${movieDB.APP_KEY}&language=en-US&page=1`;
-
     return this._http
       .get<Array<IMovieInput>>(url)
       .pipe(map(input => input['results'].map(movies => new Movie(movies))));
@@ -21,7 +20,6 @@ export class MovieService {
 
   getTopRatedMovies(): Observable<Movie[]> {
     const url = `${movieDB.BASE_URL}top_rated?api_key=${movieDB.APP_KEY}&language=en-US&page=1`;
-
     return this._http
       .get<Array<IMovieInput>>(url)
       .pipe(map(input => input['results'].map(movies => new Movie(movies))));

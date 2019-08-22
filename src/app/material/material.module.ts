@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
-import { MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatListModule, MatSidenavModule, MatToolbarModule } from '@angular/material';
+import {
+  MatInputModule,
+  MatButtonModule,
+  MatSelectModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
-
-// components
-import { MaterialSnackbar } from './components/material-snackbar/material-snackbar.component';
-import { MatIconComponent } from './components/mat-icon/mat-icon.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
 
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatOptionModule } from '@angular/material/core';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatRadioModule } from '@angular/material/radio';
-
-import { FormsModule } from '@angular/forms';
+import * as components from './components';
 
 const modules = [
   MatListModule,
@@ -29,17 +28,13 @@ const modules = [
   MatSnackBarModule,
   MatMenuModule,
   MatCardModule,
-  // MatRadioModule,
-  // MatOptionModule,
-  // MatCheckboxModule,
-  MatDialogModule,
-  // MatProgressSpinnerModule
+  MatDialogModule
 ];
 
 @NgModule({
-  declarations: [MaterialSnackbar, MatIconComponent],
+  declarations: [components.MatIconComponent, components.MaterialSnackbar],
   imports: modules,
-  exports: [...modules, MaterialSnackbar, MatIconComponent],
+  exports: [...modules, components.MatIconComponent, components.MaterialSnackbar],
   providers: []
 })
-export class MaterialSharedModule { }
+export class MaterialSharedModule {}

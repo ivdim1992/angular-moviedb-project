@@ -1,0 +1,5 @@
+<div class="container" fxFlex fxLayout="row wrap" fxLayoutGap="30px" flexLayoutAlign="center stretch">
+  <div *ngFor="let movie of searchedMovies$ | async">
+    <moviedb-movie-card fxFlex="25%" [movie]="movie"></moviedb-movie-card>
+  </div>
+</div>

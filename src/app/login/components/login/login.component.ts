@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { Router } from '@angular/router';
+import { AuthService, SnackBarService } from 'src/app/shared/services';
 
 @Component({
   selector: 'moviedb-login',

@@ -1,5 +1,12 @@
 <div class="app-{{ appTheme }}-theme site-content" id="appRootClass">
   <moviedb-header></moviedb-header>
-  <router-outlet></router-outlet>
-  <moviedb-footer></moviedb-footer>
+
+  <!-- <mat-sidenav-container fxLayout="row" fxLayoutAlign="center center"> -->
+  <!-- <mat-sidenav-content> -->
+  <div [@routeAnimations]="o && o.activatedRouteData && o.activatedRouteData['animation']">
+    <router-outlet #o="outlet"></router-outlet>
+  </div>
+  <!-- </mat-sidenav-content> -->
+  <!-- </mat-sidenav-container> -->
+  <!-- <moviedb-footer></moviedb-footer> -->
 </div>

@@ -1,0 +1,8 @@
+<div class="search-container">
+  <form #form [formGroup]="formGroup" (ngSubmit)="search(formGroup.value)">
+    <mat-form-field *ngIf="formGroup.controls['search'] as search">
+      <input matInput formControlName="search" type="text" />
+    </mat-form-field>
+    <button [disabled]="formGroup.invalid" class="search-button" mat-stroked-button color="primary">Search</button>
+  </form>
+</div>

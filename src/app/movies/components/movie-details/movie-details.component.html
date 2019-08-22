@@ -1,0 +1,12 @@
+<div class="movie-details" [@movieDetailsLoaded]="movieDetailsLoaded">
+  <img src="https://image.tmdb.org/t/p/w342{{ movieDetails?.poster_path }}" alt="" />
+  <h2 class="movie-details__title">{{ movieDetails?.title }}</h2>
+  <h4>Genres:</h4>
+  <p class="movie-details-genres">
+    {{ movieGenres?.join(',') }}
+  </p>
+  <h4>Description:</h4>
+  <p class="movie-details__description">
+    {{ movieDetails?.overview }}
+  </p>
+</div>

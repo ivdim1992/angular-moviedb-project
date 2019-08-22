@@ -1,31 +1,33 @@
 <mat-sidenav-container fxLayout="row" fxLayoutAlign="center center">
   <mat-sidenav-content>
-    <h4>Log in:</h4>
-    <form [formGroup]="formGroup" class="form" (ngSubmit)="onSubmit(formGroup.value)" fxLayout="column">
-      <mat-form-field *ngIf="formGroup.controls['email'] as email">
-        <input matInput placeholder="Email" formControlName="email" type="email" />
-        <mat-error *ngIf="email.hasError('required')">
-          Email is required
-        </mat-error>
-        <mat-error *ngIf="email.hasError('pattern')">
-          Email example test@test.com
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field *ngIf="formGroup.controls['password'] as password">
-        <input matInput type="password" placeholder="Password" formControlName="password" />
-        <mat-error *ngIf="password.hasError('required')">
-          Password is required
-        </mat-error>
-        <mat-error *ngIf="password.hasError('pattern')">
-          Only digits are allowed
-        </mat-error>
-        <mat-error *ngIf="password.hasError('minlength')">
-          Password should be more than 5 characters
-        </mat-error>
-      </mat-form-field>
-      <div>
-        <button class="form-button" mat-raised-button color="accent" type="submit" text="Log in">Log in</button>
-      </div>
-    </form>
+    <div class="form-container">
+      <h4>Log in:</h4>
+      <form [formGroup]="formGroup" class="form" (ngSubmit)="onSubmit(formGroup.value)" fxLayout="column">
+        <mat-form-field *ngIf="formGroup.controls['email'] as email">
+          <input matInput placeholder="Email" formControlName="email" type="email" />
+          <mat-error *ngIf="email.hasError('required')">
+            Email is required
+          </mat-error>
+          <mat-error *ngIf="email.hasError('pattern')">
+            Email example test@test.com
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field *ngIf="formGroup.controls['password'] as password">
+          <input matInput type="password" placeholder="Password" formControlName="password" />
+          <mat-error *ngIf="password.hasError('required')">
+            Password is required
+          </mat-error>
+          <mat-error *ngIf="password.hasError('pattern')">
+            Only digits are allowed
+          </mat-error>
+          <mat-error *ngIf="password.hasError('minlength')">
+            Password should be more than 5 characters
+          </mat-error>
+        </mat-form-field>
+        <div>
+          <button class="form-button" mat-raised-button color="accent" type="submit" text="Log in">Log in</button>
+        </div>
+      </form>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,9 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Movie } from '../../models/movie.model';
-import { MatDialog, MatDialogModule } from '@angular/material';
-import { MovieDetailsComponent } from '../movie-details/movie-details.component';
+import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
-import { MovieService } from '../../services/movie.service';
+import { MovieDetailsComponent } from 'src/app/movies/components';
 
 @Component({
   selector: 'moviedb-movie-card',

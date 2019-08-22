@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Movie } from '../../models/movie.model';
+import { Movie } from '../../models';
 
 @Component({
   selector: 'moviedb-list-items',
@@ -9,7 +9,7 @@ import { Movie } from '../../models/movie.model';
 export class ListItemComponent implements OnInit {
   @Input() items: Movie[];
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

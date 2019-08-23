@@ -3,7 +3,9 @@
   min-width: 200px;
   margin-bottom: 2rem;
   box-shadow: 0px 0px 6px 0px rgba(235, 228, 235, 0.8) !important;
-
+  &:hover {
+    box-shadow: 0px 0px 14px 0px rgba(235, 228, 235, 0.8) !important;
+  }
   /deep/ .mat-card-header-text {
     margin-top: 1rem;
     width: 100%;

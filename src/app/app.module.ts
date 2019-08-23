@@ -20,7 +20,7 @@ import { MaterialSharedModule } from './material/material.module';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    CoreModule,
+    CoreModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase, 'moviedb-project'),
     MaterialSharedModule,
     AngularFireAuthModule

@@ -20,5 +20,6 @@ export class SearchComponent implements OnInit {
   search(values) {
     const query = values.search;
     this._router.navigate(['movies/search'], { queryParams: { search: query } });
+    this.formGroup.reset();
   }
 }

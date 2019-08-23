@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Movie } from 'src/app/shared/models';
+import { Movie, MovieDetails } from 'src/app/shared/models';
 import { MovieService } from '../../shared/services';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { bounceIn } from 'ng-animate';
@@ -32,14 +32,15 @@ export class MovieDetailsComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: IMovieData,
     private _movieService: MovieService
   ) {}
+
   private _destroyed$ = new Subject<boolean>();
-  movieGenres: any[];
-  movieDetails: any;
+  movieGenres: string[];
+  movieDetails: MovieDetails;
   movieDetailsLoaded: boolean = false;
 
   ngOnInit() {
     this._movieService
-      .getDetails(this.data['id'])
+      .getMovieDetails(this.data['id'])
       .pipe(takeUntil(this._destroyed$))
       .subscribe(details => {
         this.movieDetails = details;

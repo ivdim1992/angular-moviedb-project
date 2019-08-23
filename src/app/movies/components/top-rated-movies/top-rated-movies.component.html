@@ -1,8 +1,4 @@
-<mat-sidenav-container class="sidenav-container">
-  <mat-sidenav-content>
-    <section class="sidenav-container__top-rated-movies">
-      <h3 mat-subheader class="sidenav-container__top-rated-movies-header">Top Rated Movies</h3>
-      <moviedb-list-items [items]="topRatedMovies$ | async"></moviedb-list-items>
-    </section>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+<section class="top-rated-movies-container">
+  <h3 mat-subheader class="top-rated-movies__header">Top Rated Movies</h3>
+  <moviedb-list-items [items]="topRatedMovies$ | async"></moviedb-list-items>
+</section>

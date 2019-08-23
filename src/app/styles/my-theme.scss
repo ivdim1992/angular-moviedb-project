@@ -8,9 +8,9 @@ body {
   font-family: 'Lora', serif;
 }
 
-$theme-primary: mat-palette($mat-blue-grey, 100, 200, 300);
-$theme-accent: mat-palette($mat-blue-grey, 400);
-$theme-warn: mat-palette($mat-red, 500);
+$theme-primary: mat-palette($mat-blue-grey, 200, 500, 300);
+$theme-accent: mat-palette($mat-blue-grey, 100);
+$theme-warn: mat-palette($mat-red, 600);
 
 $theme-black-theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
 

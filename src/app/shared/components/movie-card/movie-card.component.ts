@@ -10,11 +10,11 @@ import { MovieDetailsComponent } from 'src/app/movies/components';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit {
-  @Input() movie: Movie;
-  imagePath: string;
   constructor(private _dialog: MatDialog) {}
 
-  movieDetails$: Observable<any>;
+  @Input() movie: Movie;
+  imagePath: string;
+
   ngOnInit() {
     this.imagePath = 'https://image.tmdb.org/t/p/w154' + this.movie.imagePath;
   }

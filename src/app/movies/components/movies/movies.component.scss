@@ -1,21 +1,11 @@
-.sidenav-container {
-  height: 100%;
-  min-height: 100%;
-  width: 100%;
-  min-width: 100%;
-  padding: 2rem 0;
-  background-color: #0f1210de;
+.popular-movies,
+.top-rated-movies {
+  text-align: center;
 
-  &__popular-movies,
-  &__top-rated-movies {
-    text-align: center;
-    border-top: 1px solid;
-
-    &-header {
-      display: inline-block;
-      margin-top: 1rem;
-      margin-bottom: 0;
-      text-decoration: underline;
-    }
+  &__header {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-decoration: underline;
   }
 }

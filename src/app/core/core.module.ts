@@ -7,6 +7,8 @@ import { MoviesModule } from '../movies/movies.module';
 import * as components from './components';
 import * as guards from './guards';
 
+import { MovieService } from '../movies/shared/services';
+
 @NgModule({
   declarations: [components.HeaderComponent, components.HomeComponent, components.FooterComponent],
   imports: [CommonModule, RouterModule, SharedModule, MoviesModule],
@@ -14,19 +16,15 @@ import * as guards from './guards';
   providers: [guards.AuthGuard]
 })
 export class CoreModule {
-  //   constructor(
-  //     @Optional()
-  //     @SkipSelf()
-  //     parentModule: CoreModule | null
-  //   ) {
-  //     if (parentModule) {
-  //       throw new Error('CoreModule is already loaded. Import it in the AppModule only.');
-  //     }
-  //   }
-  //   static forRoot(): ModuleWithProviders {
-  //     return {
-  //       ngModule: CoreModule,
-  //       providers: [MovieService]
-  //     };
-  //   }
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    if (parentModule) {
+      throw new Error('CoreModule is already loaded. Import it in the AppModule only.');
+    }
+  }
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: CoreModule,
+      providers: [MovieService]
+    };
+  }
 }

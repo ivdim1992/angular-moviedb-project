@@ -17,5 +17,8 @@
     <span *ngIf="!userEmail">
       <a [routerLink]="['login']">Login</a>
     </span>
+    <span class="register" *ngIf="!userEmail">
+      <a [routerLink]="['register']">Register</a>
+    </span>
   </mat-toolbar-row>
 </mat-toolbar>

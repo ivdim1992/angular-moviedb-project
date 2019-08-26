@@ -37,4 +37,4 @@ const modules = [
   exports: [...modules, components.MatIconComponent, components.MaterialSnackbar],
   providers: []
 })
-export class MaterialSharedModule {}
+export class MaterialSharedModule { }

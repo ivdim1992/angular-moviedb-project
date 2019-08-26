@@ -9,6 +9,13 @@ a {
   color: white;
 }
 
+.mat-sidenav-container {
+  height: 100vh;
+}
+
+.mat-sidenav-content {
+}
+
 .mat-dialog-container {
   background: #0f1210de;
 }
@@ -17,4 +24,8 @@ a {
 }
 .mat-simple-snackbar {
   color: #000000;
+}
+
+.mat-form-field {
+  margin-bottom: 1.5rem;
 }

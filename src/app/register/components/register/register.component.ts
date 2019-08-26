@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService, SnackBarService } from 'src/app/shared/services';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'moviedb-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'moviedb-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
   formGroup: FormGroup;
-  loginFormTitle: string = "Login"
-  constructor(
-    private _formBuilder: FormBuilder,
-    private _authService: AuthService,
-    private _snackBar: SnackBarService,
-    private _route: Router
-  ) { }
+  registerFormTitle: string = "Register"
+
+  constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _snackBar: SnackBarService, private _route: Router) { }
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
@@ -33,17 +29,18 @@ export class LoginComponent implements OnInit {
     const { email, password } = values;
 
     this._authService
-      .login(email, password)
+      .register(email, password)
       .then(user => {
         localStorage.setItem('email', user.user.email);
         this._snackBar.open({
-          message: 'Log in successfuly!'
+          message: 'Register successfuly!'
         });
+        this._authService.login(email, password);
         this._route.navigate(['home']);
       })
       .catch(() => {
         this._snackBar.open({
-          message: 'There is a problem verifying your credentials'
+          message: 'There is a with your registration'
         });
       });
   }

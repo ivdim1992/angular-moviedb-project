@@ -10,17 +10,18 @@ import * as services from './services';
 import * as components from './components';
 
 @NgModule({
-  declarations: [components.MovieCardComponent, components.ListItemComponent, components.SearchComponent],
+  declarations: [components.MovieCardComponent, components.ListItemComponent, components.SearchComponent, components.ButtonComponent],
   imports: [HttpClientModule, MaterialSharedModule, FormsModule, FlexLayoutModule, CommonModule, ReactiveFormsModule],
   providers: [services.AuthService, services.SnackBarService],
   exports: [
     components.MovieCardComponent,
-    FlexLayoutModule,
-    MaterialSharedModule,
     components.SearchComponent,
     components.ListItemComponent,
+    components.ButtonComponent,
+    FlexLayoutModule,
+    MaterialSharedModule,
     ReactiveFormsModule
   ],
   entryComponents: []
 })
-export class SharedModule {}
+export class SharedModule { }

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { first, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 
 @Injectable({
@@ -36,6 +35,11 @@ export class AuthService {
   login(name: string, password: string) {
     this.isAuthenticated$.next(true);
     return this._afAuth.auth.signInWithEmailAndPassword(name, password);
+  }
+
+  register(email: string, password: string) {
+    this.isAuthenticated$.next(true);
+    return this._afAuth.auth.createUserWithEmailAndPassword(email, password);
   }
 
   getToken(): Observable<string> {

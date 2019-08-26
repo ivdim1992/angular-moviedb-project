@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: '', pathMatch: 'full', component: HomeComponent, data: { animation: 'home' } },
   { path: 'movies', loadChildren: '../app/movies/movies.module#MoviesModule' },
   { path: 'login', loadChildren: '../app/login/login.module#LoginModule' },
+  { path: 'register', loadChildren: '../app/register/register.module#RegisterModule' },
   {
     path: '**',
     pathMatch: 'full',
@@ -17,4 +18,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

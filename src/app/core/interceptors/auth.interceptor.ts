@@ -1,44 +1,23 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpInterceptor,
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpHeaders,
-  HttpEventType,
-  HttpResponse
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { tap, first } from 'rxjs/operators';
-import { movieDB } from '../../shared/enums';
-import { async } from 'q';
+import { HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/shared/services';
+import { MOVIEDB } from 'src/app/app.config';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(public _authService: AuthService) {}
-  token: string;
+export class AuthInterceptor {
+  sessionID$ = new BehaviorSubject<string>(null);
+  token$ = new BehaviorSubject<any>(null);
+  constructor(public _authService: AuthService, private _router: ActivatedRoute) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    // this._authService
-    //   .getToken()
-    //   .pipe(first())
-    //   .subscribe(data => {
-    //     if (data) {
-    //       this.token = data;
-    //     }
-    //   });
-    // let newHeaders = { 'Content-Type': 'application-json', Authorization: `${movieDB.APP_KEY}` };
-
-    // if (this.token && !req.url.startsWith(movieDB.BASE_URL)) {
-    //   console.log('here');
-    //   newHeaders = {
-    //     'Content-Type': 'application-json',
-    //     Authorization: `Bearer ${this.token}`
-    //   };
-    // }
-
-    return next.handle(req.clone());
+    if (req.url.startsWith(MOVIEDB.BASE_URL)) {
+      //   req.params.append('api_key', MOVIEDB.APP_KEY);
+      //   req.params.append('session_id', this._authService.getSessionLocalstore());
+      req.params.set('api_key', MOVIEDB.APP_KEY);
+      req.params.set('session_id', this._authService.getSessionLocalstore());
+      return next.handle(req);
+    }
   }
 }

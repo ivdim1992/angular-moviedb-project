@@ -7,12 +7,17 @@
     .example-spacer {
       flex: 1 1 auto;
     }
+    .my-list {
+      margin-right: 1rem;
+    }
     &-welcome-user {
       margin-right: 3rem;
     }
-
-    .register {
-      margin-left: 1rem;
+    .logout {
+      cursor: pointer;
     }
+    // .register {
+    //   margin-left: 1rem;
+    // }
   }
 }

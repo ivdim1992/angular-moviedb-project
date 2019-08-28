@@ -10,9 +10,14 @@ import { Router } from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   formGroup: FormGroup;
-  registerFormTitle: string = "Register"
+  registerFormTitle: string = 'Register';
 
-  constructor(private _formBuilder: FormBuilder, private _authService: AuthService, private _snackBar: SnackBarService, private _route: Router) { }
+  constructor(
+    private _formBuilder: FormBuilder,
+    private _authService: AuthService,
+    private _snackBar: SnackBarService,
+    private _route: Router
+  ) {}
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
@@ -28,20 +33,20 @@ export class RegisterComponent implements OnInit {
 
     const { email, password } = values;
 
-    this._authService
-      .register(email, password)
-      .then(user => {
-        localStorage.setItem('email', user.user.email);
-        this._snackBar.open({
-          message: 'Register successfuly!'
-        });
-        this._authService.login(email, password);
-        this._route.navigate(['home']);
-      })
-      .catch(() => {
-        this._snackBar.open({
-          message: 'There is a with your registration'
-        });
-      });
+    // this._authService
+    //   .register(email, password)
+    //   .then(user => {
+    //     localStorage.setItem('email', user.user.email);
+    //     this._snackBar.open({
+    //       message: 'Register successfuly!'
+    //     });
+    //     this._authService.login(email, password);
+    //     this._route.navigate(['home']);
+    //   })
+    //   .catch(() => {
+    //     this._snackBar.open({
+    //       message: 'There is a with your registration'
+    //     });
+    //   });
   }
 }

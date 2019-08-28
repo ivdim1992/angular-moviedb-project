@@ -1,66 +1,72 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { User } from 'firebase';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { switchMap, first, tap } from 'rxjs/operators';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
+import { MOVIEDB } from 'src/app/app.config';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private _destroyed$ = new Subject<boolean>();
-  isAuthenticated$ = new BehaviorSubject<boolean>(false);
-  currentUser: User;
+  currentUser$ = new BehaviorSubject<any>(null);
+  constructor(
+    public _afAuth: AngularFireAuth,
+    public _router: Router,
+    private _snackBar: SnackBarService,
+    private _http: HttpClient
+  ) {}
 
-  constructor(public _afAuth: AngularFireAuth, public _router: Router, private _snackBar: SnackBarService) {
-    this._afAuth.authState.pipe(takeUntil(this._destroyed$)).subscribe(user => {
-      if (user) {
-        this.currentUser = user;
-      } else {
-        this.currentUser = null;
-      }
-    });
+  startLogin(credentials): Observable<any> {
+    const url = `https://api.themoviedb.org/3/authentication/token/new?api_key=${MOVIEDB.APP_KEY}`;
+    return this._http.get(url).pipe(
+      switchMap(response => {
+        let token = response['request_token'];
+        return this.getSessionWithCredentials(credentials, token).pipe(
+          switchMap(validToken => {
+            let token = validToken['request_token'];
+            return this.getSession(token);
+          })
+        );
+      })
+    );
   }
 
-  fetchCurrentUser(): Observable<User> {
-    return this._afAuth.authState;
+  setSession(session) {
+    if (!session) {
+      localStorage.setItem('session_id', null);
+    }
+    localStorage.setItem('session_id', session);
   }
 
-  hasLoggedUser(): boolean {
-    return !!this.currentUser;
+  getSession(token) {
+    const url = `https://api.themoviedb.org/3/authentication/session/new?api_key=${MOVIEDB.APP_KEY}`;
+    const body = { request_token: token };
+    return this._http.post(url, body);
   }
 
-  login(name: string, password: string) {
-    this.isAuthenticated$.next(true);
-    return this._afAuth.auth.signInWithEmailAndPassword(name, password);
+  getSessionWithCredentials(credentials, token): Observable<any> {
+    const url = `https://api.themoviedb.org/3/authentication/token/validate_with_login?api_key=${MOVIEDB.APP_KEY}`;
+    const { username, password } = credentials;
+    const body = { request_token: token, username: username, password: password };
+    return this._http.post(url, body);
   }
 
-  register(email: string, password: string) {
-    this.isAuthenticated$.next(true);
-    return this._afAuth.auth.createUserWithEmailAndPassword(email, password);
-  }
-
-  getToken(): Observable<string> {
-    return this._afAuth.idToken;
+  getSessionLocalstore(): string {
+    let session_id = localStorage.getItem('session_id');
+    if (!session_id) {
+      return null;
+    }
+    return session_id;
   }
 
   logout() {
-    this._afAuth.auth
-      .signOut()
-      .then(_ => {
-        this.isAuthenticated$.next(false);
-        localStorage.removeItem('email');
-        this._router.navigate(['login']);
-        this._snackBar.open({
-          message: 'Logout successfuly!'
-        });
-      })
-      .catch(err => {
-        this._snackBar.open({
-          message: 'We are having troubles logging you out!'
-        });
-      });
+    localStorage.clear();
+    this._router.navigate(['login']);
+    this._snackBar.open({
+      message: 'Logout successfuly!'
+    });
   }
 }

@@ -3,6 +3,9 @@
 *:after {
   box-sizing: border-box;
 }
+body {
+  height: 100vh;
+}
 
 a {
   text-decoration: none;
@@ -10,10 +13,14 @@ a {
 }
 
 .mat-sidenav-container {
-  height: 100vh;
 }
 
 .mat-sidenav-content {
+  overflow: hidden !important;
+}
+
+.mat-drawer-content {
+  height: auto;
 }
 
 .mat-dialog-container {

@@ -8,17 +8,20 @@
     <span class="toolbar__row-logo">movieDB</span>
     <span class="example-spacer"></span>
     <moviedb-search></moviedb-search>
-    <div *ngIf="userEmail">
-      <span class="toolbar__row-welcome-user">Welcome, {{ userEmail }}!</span>
-      <span>
+    <div *ngIf="session">
+      <!-- <span class="toolbar__row-welcome-user">Welcome, {{ userEmail }}!</span> -->
+      <span class="my-list">
+        <a [routerLink]="['my-list']">My List</a>
+      </span>
+      <span class="logout">
         <a (click)="logoutUser()">Logout</a>
       </span>
     </div>
-    <span *ngIf="!userEmail">
+    <span *ngIf="!session">
       <a [routerLink]="['login']">Login</a>
     </span>
-    <span class="register" *ngIf="!userEmail">
+    <!-- <span class="register" *ngIf="!userEmail">
       <a [routerLink]="['register']">Register</a>
-    </span>
+    </span> -->
   </mat-toolbar-row>
 </mat-toolbar>

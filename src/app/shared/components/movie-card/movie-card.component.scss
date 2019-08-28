@@ -1,32 +1,106 @@
-.movie-card {
-  max-width: 450px;
-  min-width: 200px;
-  margin-bottom: 2rem;
-  box-shadow: 0px 0px 6px 0px rgba(235, 228, 235, 0.8) !important;
-  &:hover {
-    box-shadow: 0px 0px 14px 0px rgba(235, 228, 235, 0.8) !important;
-  }
-  /deep/ .mat-card-header-text {
-    margin-top: 1rem;
+.flipcard {
+  margin: 25px auto;
+  height: 350px;
+  width: 240px;
+  position: relative;
+  perspective: 700px;
+  transform-style: preserve-3d;
+  text-align: center;
+
+  &_front,
+  &_back {
+    backface-visibility: hidden;
+    height: 100%;
     width: 100%;
-    text-align: center;
+    top: 50%;
+    left: 50%;
+    transition: all 0.5s ease;
   }
 
-  .mat-card-content {
-    display: inline;
-  }
-  .movie-card img {
-    object-fit: cover;
-    width: 100%;
-    height: 80%;
+  &_front {
+    position: relative;
+    transform: translate(-50%, -50%) rotateY(0deg);
+    background-size: 100% 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+
+    &:hover {
+      transform: translate(-50%, -50%) rotateY(180deg);
+    }
+    & img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: auto;
+    }
   }
 
-  .mat-card-actions button {
-    margin: 1rem 0rem;
-    padding: 0.6rem 1.6rem;
-    background-color: black;
-    border: none;
-    color: #ffffff;
-    cursor: pointer;
+  &_back {
+    position: absolute;
+    transform: translate(-50%, -50%) rotateY(180deg);
+    color: white;
+    background: linear-gradient(
+      120deg,
+      rgb(100, 100, 110),
+      rgb(20, 30, 30) 20%,
+      rgb(20, 30, 30) 80%,
+      rgb(100, 100, 110)
+    );
+
+    &:hover {
+      transform: translate(-50%, -50%) rotateY(360deg);
+    }
   }
+
+  &_description {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 100%;
+    padding: 0.3rem 0.6rem;
+    overflow: auto;
+
+    &-header {
+      color: #c6a869;
+    }
+    &-buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      align-items: center;
+      margin-top: 12rem;
+    }
+    &-btn {
+      background: transparent;
+      border: solid 1px white;
+      border-radius: 50%;
+      color: white;
+      padding: 0;
+      transition: all 0.3s;
+      text-align: center;
+      padding: 0.8rem 1.5rem;
+      border-radius: 0.4rem;
+      outline: none;
+
+      &:hover {
+        color: black;
+        background: white;
+        cursor: pointer;
+      }
+    }
+    & i {
+      cursor: pointer;
+    }
+  }
+}
+.flipcard:hover .flipcard_front {
+  transform: translate(-50%, -50%) rotateY(180deg);
+}
+
+.flipcard:hover .flipcard_back {
+  transform: translate(-50%, -50%) rotateY(360deg);
 }

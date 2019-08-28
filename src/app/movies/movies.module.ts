@@ -6,6 +6,7 @@ import { MoviesRoutingModule } from './movies-routing.module';
 
 import * as components from './components';
 import * as services from './shared/services';
+import { MaterialSharedModule } from '../material/material.module';
 
 @NgModule({
   declarations: [
@@ -13,10 +14,11 @@ import * as services from './shared/services';
     components.PopularMoviesComponent,
     components.TopRatedMoviesComponent,
     components.MovieDetailsComponent,
-    components.SearchMoviesComponent
+    components.SearchMoviesComponent,
+    components.MyListComponent
   ],
-  imports: [MoviesRoutingModule, CommonModule, RouterModule, SharedModule],
-  exports: [components.MoviesComponent],
+  imports: [MoviesRoutingModule, CommonModule, RouterModule, SharedModule, MaterialSharedModule],
+  exports: [components.MoviesComponent, components.MyListComponent],
   providers: [services.MovieService],
   entryComponents: [components.MovieDetailsComponent]
 })

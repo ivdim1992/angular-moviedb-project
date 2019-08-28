@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Movie } from 'src/app/shared/models';
 import { MovieService } from '../../shared/services';
-import { transition, query, style, stagger, keyframes, animate, trigger } from '@angular/animations';
 
 @Component({
   selector: 'moviedb-movies',

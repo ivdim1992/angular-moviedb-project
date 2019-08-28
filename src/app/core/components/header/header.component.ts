@@ -1,8 +1,5 @@
 import { Component, OnInit, OnChanges, SimpleChanges, DoCheck, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/services';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'moviedb-header',
@@ -12,13 +9,11 @@ import { FormGroup, FormBuilder, NgForm } from '@angular/forms';
 export class HeaderComponent implements OnInit, DoCheck {
   constructor(private _autService: AuthService) {}
 
-  isAuthenticated$: Observable<boolean>;
-  userEmail: string;
-  ngDoCheck() {
-    this.userEmail = localStorage.getItem('email');
-    this.isAuthenticated$ = this._autService.isAuthenticated$;
-  }
+  session: string;
 
+  ngDoCheck() {
+    this.session = localStorage.getItem('session_id');
+  }
   ngOnInit() {}
 
   logoutUser() {

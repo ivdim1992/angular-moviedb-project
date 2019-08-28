@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService, SnackBarService } from 'src/app/shared/services';
+import { PasswordLengthValidator } from 'src/app/shared/validators';
+import { catchError } from 'rxjs/operators';
 
 @Component({
   selector: 'moviedb-login',
@@ -10,18 +12,19 @@ import { AuthService, SnackBarService } from 'src/app/shared/services';
 })
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
-  loginFormTitle: string = "Login"
+  loginFormTitle: string = 'Login';
+  token;
   constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
     private _snackBar: SnackBarService,
     private _route: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
-      email: [null, [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
-      password: [null, [Validators.required, Validators.minLength(5), Validators.pattern('[A-Za-z0-9]*')]]
+      username: [null, [Validators.required]],
+      password: [null, [Validators.required, PasswordLengthValidator.getValidator()]]
     });
   }
 
@@ -29,21 +32,23 @@ export class LoginComponent implements OnInit {
     if (this.formGroup.invalid) {
       return;
     }
-
-    const { email, password } = values;
-
+    const { username, password } = values;
+    const credentials = { username, password };
     this._authService
-      .login(email, password)
-      .then(user => {
-        localStorage.setItem('email', user.user.email);
+      .startLogin(credentials)
+      .toPromise()
+      .then(session => {
+        let session_id = session.session_id;
+
+        this._authService.setSession(session_id);
         this._snackBar.open({
           message: 'Log in successfuly!'
         });
         this._route.navigate(['home']);
       })
-      .catch(() => {
+      .catch(err => {
         this._snackBar.open({
-          message: 'There is a problem verifying your credentials'
+          message: 'Your credentials are incorrect'
         });
       });
   }

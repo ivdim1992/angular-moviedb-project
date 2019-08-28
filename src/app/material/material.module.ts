@@ -8,7 +8,8 @@ import {
   MatIconModule,
   MatListModule,
   MatSidenavModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTableModule
 } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
@@ -28,7 +29,8 @@ const modules = [
   MatSnackBarModule,
   MatMenuModule,
   MatCardModule,
-  MatDialogModule
+  MatDialogModule,
+  MatTableModule
 ];
 
 @NgModule({
@@ -37,4 +39,4 @@ const modules = [
   exports: [...modules, components.MatIconComponent, components.MaterialSnackbar],
   providers: []
 })
-export class MaterialSharedModule { }
+export class MaterialSharedModule {}

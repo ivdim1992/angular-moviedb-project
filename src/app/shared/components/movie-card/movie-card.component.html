@@ -1,11 +1,19 @@
-<mat-card class="movie-card">
-  <mat-card-content>
+<div class="flipcard">
+  <div class="flipcard_front">
     <img src="{{ imagePath }}" alt="movie" />
-    <mat-card-header>
-      <mat-card-title>{{ movie.title.slice(0, 25) }}</mat-card-title>
-    </mat-card-header>
-  </mat-card-content>
-  <mat-card-actions>
-    <button (click)="onClicked()" class="btn" type="button">View Details</button>
-  </mat-card-actions>
-</mat-card>
+  </div>
+  <div class="flipcard_back">
+    <div class="flipcard_description">
+      <h3 class="flipcard_description-header">{{ movie.title }}</h3>
+      <div class="flipcard_description-buttons">
+        <button class="flipcard_description-btn" (click)="onClicked()" type="button">View Details</button>
+        <i class="material-icons" (click)="addToFavorites()" *ngIf="!isInFavorites">
+          favorite_border
+        </i>
+        <i class="material-icons" *ngIf="isInFavorites">
+          favorite
+        </i>
+      </div>
+    </div>
+  </div>
+</div>

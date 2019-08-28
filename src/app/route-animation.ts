@@ -1,25 +1,28 @@
 import { transition, trigger, query, style, animate, group, animateChild } from '@angular/animations';
 export const slideInAnimation = trigger('routeAnimations', [
   transition('home => *', [
-    query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
+    query(':enter, :leave', style({ background: '#303030', position: 'fixed', width: '100%' }), { optional: true }),
     group([
       query(
         ':enter',
         [
-          style({ transform: 'translateX(-100%)' }),
-          animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))
+          style({ transform: 'translateX(-100%)', background: '#303030' }),
+          animate('0.5s ease-in-out', style({ transform: 'translateX(0%)', background: '#303030' }))
         ],
         { optional: true }
       ),
       query(
         ':leave',
-        [style({ transform: 'translateX(0%)' }), animate('0.5s ease-in-out', style({ transform: 'translateX(100%)' }))],
+        [
+          style({ transform: 'translateX(0%)', background: '#303030' }),
+          animate('0.5s ease-in-out', style({ transform: 'translateX(100%)', background: '#303030' }))
+        ],
         { optional: true }
       )
     ])
   ]),
   transition('* => home', [
-    query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
+    query(':enter, :leave', style({ position: 'fixed', width: '100%', background: '#303030' }), { optional: true }),
     group([
       query(
         ':enter',
@@ -36,40 +39,4 @@ export const slideInAnimation = trigger('routeAnimations', [
       )
     ])
   ])
-  //   transition('movies => login', [
-  //     query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
-  //     group([
-  //       query(
-  //         ':enter',
-  //         [style({ transform: 'translateX(100%)' }), animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))],
-  //         { optional: true }
-  //       ),
-  //       query(
-  //         ':leave',
-  //         [
-  //           style({ transform: 'translateX(0%)' }),
-  //           animate('0.5s ease-in-out', style({ transform: 'translateX(-100%)' }))
-  //         ],
-  //         { optional: true }
-  //       )
-  //     ])
-  //   ]),
-  //   transition('movies => /', [
-  //     query(':enter, :leave', style({ position: 'fixed', width: '100%' }), { optional: true }),
-  //     group([
-  //       query(
-  //         ':enter',
-  //         [
-  //           style({ transform: 'translateX(-100%)' }),
-  //           animate('0.5s ease-in-out', style({ transform: 'translateX(0%)' }))
-  //         ],
-  //         { optional: true }
-  //       ),
-  //       query(
-  //         ':leave',
-  //         [style({ transform: 'translateX(0%)' }), animate('0.5s ease-in-out', style({ transform: 'translateX(100%)' }))],
-  //         { optional: true }
-  //       )
-  //     ])
-  //   ])
 ]);

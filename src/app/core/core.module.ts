@@ -13,7 +13,7 @@ import { MovieService } from '../movies/shared/services';
   declarations: [components.HeaderComponent, components.HomeComponent, components.FooterComponent],
   imports: [CommonModule, RouterModule, SharedModule, MoviesModule],
   exports: [components.HeaderComponent, components.HomeComponent, components.FooterComponent],
-  providers: [guards.AuthGuard]
+  providers: [guards.AuthGuard, guards.AuthenticatedGuard]
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

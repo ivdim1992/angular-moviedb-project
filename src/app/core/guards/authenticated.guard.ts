@@ -4,15 +4,15 @@ import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/shared/services';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class AuthenticatedGuard implements CanActivate {
   constructor(private _authService: AuthService, private _router: Router) {}
 
   canActivate(): Observable<boolean> {
     if (this._authService.getSessionLocalstore()) {
-      return of(true);
+      this._router.navigate(['/']);
+      return of(false);
     }
 
-    this._router.navigate(['login']);
-    return of(false);
+    return of(true);
   }
 }

@@ -41,7 +41,7 @@ export class MovieCardComponent implements OnInit, DoCheck {
       })
       .catch(err => {
         this._snackBar.open({
-          message: 'There is problem with adding your movie to favorites'
+          message: 'You have to be logged in to add to favorites!'
         });
       });
   }

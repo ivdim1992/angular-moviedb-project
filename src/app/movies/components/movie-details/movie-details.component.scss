@@ -1,3 +1,9 @@
+.close-button {
+  display: flex;
+  flex-direction: row-reverse;
+  color: #ffffff;
+  cursor: pointer;
+}
 .movie-details {
   text-align: center;
   color: #ffffff;

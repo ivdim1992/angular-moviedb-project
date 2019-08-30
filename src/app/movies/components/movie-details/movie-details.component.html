@@ -1,3 +1,6 @@
+<div class="close-button">
+  <span (click)="closeDialog()" class="cursor-pointer">X</span>
+</div>
 <div class="movie-details" [@movieDetailsLoaded]="movieDetailsLoaded">
   <img src="https://image.tmdb.org/t/p/w342{{ movieDetails?.imagePath }}" alt="" />
   <h2 class="movie-details__title">{{ movieDetails?.movieTitle }}</h2>

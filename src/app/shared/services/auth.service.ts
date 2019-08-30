@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { switchMap, first, tap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { switchMap, first, tap, takeUntil } from 'rxjs/operators';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { MOVIEDB } from 'src/app/app.config';
 import { HttpClient } from '@angular/common/http';
+import { IUser } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   currentUser$ = new BehaviorSubject<any>(null);
+  private _destroy = new Subject<boolean>();
+
   constructor(
     public _afAuth: AngularFireAuth,
     public _router: Router,

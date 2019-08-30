@@ -1,29 +1,33 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
-import { Movie } from '../../models/movie.model';
 import { MatDialog } from '@angular/material';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
 import { MovieDetailsComponent } from 'src/app/movies/components';
-import { AuthService, SnackBarService } from '../../services';
+import { SnackBarService } from '../../services';
 import { MovieService } from 'src/app/movies/shared/services';
-import { takeUntil, map } from 'rxjs/operators';
+import { Movie } from '../../models';
 
 @Component({
   selector: 'moviedb-movie-card',
   templateUrl: './movie-card.component.html',
   styleUrls: ['./movie-card.component.scss']
 })
-export class MovieCardComponent implements OnInit {
+export class MovieCardComponent implements OnInit, DoCheck {
   constructor(private _dialog: MatDialog, private _movieService: MovieService, private _snackBar: SnackBarService) {}
 
   @Input() movie: Movie;
-  @Input() favoriteMovies: Movie[];
-
+  @Input() favoriteIDs: [];
+  IsInFavortie: boolean;
   imagePath: string;
-  isInFavorites: boolean = false;
-  favoriteMovies$: Observable<Array<Movie>>;
 
   ngOnInit() {
     this.imagePath = 'https://image.tmdb.org/t/p/w185' + this.movie.imagePath;
+  }
+
+  ngDoCheck() {
+    if (this.favoriteIDs) {
+      this.favoriteIDs.map(favIds => {
+        this.IsInFavortie = this.movie.id === favIds ? true : false;
+      });
+    }
   }
 
   addToFavorites() {

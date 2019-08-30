@@ -8,7 +8,7 @@ import { Movie } from '../../models';
 })
 export class ListItemComponent implements OnInit {
   @Input() items: Movie[];
-
+  @Input() favoriteIDs: [];
   constructor() {}
 
   ngOnInit() {}

@@ -15,9 +15,21 @@ export class MoviesComponent implements OnInit {
   listAnimation: boolean = false;
   popularMovies$: Observable<Array<Movie>>;
   topRatedMovies$: Observable<Array<Movie>>;
+  favoriteMoviesIDs = [];
 
   ngOnInit() {
-    this.popularMovies$ = this._movieService.getPopularMovies().pipe(map(movies => movies.slice(2, 7)));
-    this.topRatedMovies$ = this._movieService.getTopRatedMovies().pipe(map(movies => movies.slice(2, 7)));
+    this.popularMovies$ = this._movieService.getPopularMovies().pipe(map(movies => movies.slice(0, 5)));
+    this.topRatedMovies$ = this._movieService.getTopRatedMovies().pipe(map(movies => movies.slice(0, 5)));
+
+    // this._movieService
+    //   .getFavoriteMovies()
+    //   .pipe(
+    //     map(movies => {
+    //       return movies.map(movie => movie.id);
+    //     })
+    //   )
+    //   .subscribe(ids => {
+    //     this.favoriteMoviesIDs = ids;
+    //   });
   }
 }

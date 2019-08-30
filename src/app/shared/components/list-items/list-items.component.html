@@ -1,5 +1,5 @@
 <div class="list-items-container" fxLayout="row wrap" fxLayoutAlign="center center">
   <div class="item" *ngFor="let item of items" fxLayoutGap="20px">
-    <moviedb-movie-card [movie]="item"></moviedb-movie-card>
+    <moviedb-movie-card [movie]="item" [favoriteIDs]="favoriteIDs"></moviedb-movie-card>
   </div>
 </div>

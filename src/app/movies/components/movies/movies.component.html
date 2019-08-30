@@ -3,12 +3,12 @@
     <a [routerLink]="['/', 'movies', 'popular-movies']">
       <h3 mat-subheader class="popular-movies__header">Popular Movies</h3>
     </a>
-    <moviedb-list-items [items]="popularMovies$ | async"></moviedb-list-items>
+    <moviedb-list-items [favoriteIDs]="favoriteMoviesIDs" [items]="popularMovies$ | async"></moviedb-list-items>
   </section>
   <section class="top-rated-movies">
     <a [routerLink]="['/', 'movies', 'top-rated-movies']">
       <h3 mat-subheader class="top-rated-movies__header">Top Rated Movies</h3>
     </a>
-    <moviedb-list-items [items]="topRatedMovies$ | async"></moviedb-list-items>
+    <moviedb-list-items [favoriteIDs]="favoriteMoviesIDs" [items]="topRatedMovies$ | async"></moviedb-list-items>
   </section>
 </div>

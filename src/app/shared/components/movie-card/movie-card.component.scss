@@ -74,24 +74,7 @@
       align-items: center;
       margin-top: 12rem;
     }
-    &-btn {
-      background: transparent;
-      border: solid 1px white;
-      border-radius: 50%;
-      color: white;
-      padding: 0;
-      transition: all 0.3s;
-      text-align: center;
-      padding: 0.8rem 1.5rem;
-      border-radius: 0.4rem;
-      outline: none;
 
-      &:hover {
-        color: black;
-        background: white;
-        cursor: pointer;
-      }
-    }
     & i {
       cursor: pointer;
     }

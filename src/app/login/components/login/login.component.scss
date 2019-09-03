@@ -1,9 +1,10 @@
 .login {
   height: 100vh;
-  width: 60%;
+  max-width: 550px;
   margin: 0 auto;
 
   &-header {
+    font-size: 2rem;
   }
 
   &-form {

@@ -1,55 +1,32 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { Movie, MovieDetails } from 'src/app/shared/models';
+import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../../shared/services';
-import { trigger, transition, useAnimation } from '@angular/animations';
-import { bounceIn } from 'ng-animate';
-
-export interface IMovieData {
-  movie: Movie;
-}
+import { ActivatedRoute } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { MovieDetails } from 'src/app/shared/models';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'moviedb-movie-details',
   templateUrl: './movie-details.component.html',
-  styleUrls: ['./movie-details.component.scss'],
-  animations: [
-    trigger('movieDetailsLoaded', [
-      transition(
-        'false => true',
-        useAnimation(bounceIn, {
-          delay: 5000
-        })
-      )
-    ])
-  ]
+  styleUrls: ['./movie-details.component.scss']
 })
 export class MovieDetailsComponent implements OnInit {
-  constructor(
-    public dialogRef: MatDialogRef<MovieDetailsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IMovieData,
-    private _movieService: MovieService
-  ) {}
 
-  private _destroyed$ = new Subject<boolean>();
-  movieGenres: string[];
+  id: string;
   movieDetails: MovieDetails;
+  movieGenres: string[];
   movieDetailsLoaded: boolean = false;
+  private _destroyed$ = new Subject<boolean>();
+
+  constructor(private _movieSevice: MovieService, private _route: ActivatedRoute) { }
 
   ngOnInit() {
-    this._movieService
-      .getMovieDetails(this.data['id'])
-      .pipe(takeUntil(this._destroyed$))
+    this.id = this._route.snapshot.params.id;
+    this._movieSevice.getMovieDetails(this.id).pipe(takeUntil(this._destroyed$))
       .subscribe(details => {
         this.movieDetails = details;
         this.movieGenres = details.genres.map(genres => genres.name);
         this.movieDetailsLoaded = true;
       });
-  }
-
-  closeDialog() {
-    this.dialogRef.close();
   }
 }

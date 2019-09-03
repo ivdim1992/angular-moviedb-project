@@ -1,4 +1,8 @@
-<section class="popular-movies-container">
-  <h3 mat-subheader class="sidenav-container__popular-movies-header">Popular Movies</h3>
-  <moviedb-list-items [items]="popularMovies$ | async"></moviedb-list-items>
-</section>
+<moviedb-spinner *ngIf="!(popularMovies$ | async)?.length; else popular"></moviedb-spinner>
+
+<ng-template #popular>
+  <section class="popular-movies-container">
+    <h3 mat-subheader class="sidenav-container__popular-movies-header">Popular Movies</h3>
+    <moviedb-list-items [items]="popularMovies$ | async"></moviedb-list-items>
+  </section>
+</ng-template>

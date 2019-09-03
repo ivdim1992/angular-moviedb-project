@@ -1,0 +1,20 @@
+.close-button {
+  display: flex;
+  flex-direction: row-reverse;
+  color: #ffffff;
+  cursor: pointer;
+}
+.movie-details {
+  text-align: center;
+  color: #ffffff;
+
+  &__description {
+    width: 70%;
+    text-align: start;
+    margin: 0 auto;
+  }
+}
+
+.view-more {
+  margin-top: 1rem;
+}

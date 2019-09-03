@@ -13,13 +13,14 @@ import { catchError } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   formGroup: FormGroup;
   loginFormTitle: string = 'Login';
-  token;
+  isLogged: boolean = false;
+
   constructor(
     private _formBuilder: FormBuilder,
     private _authService: AuthService,
     private _snackBar: SnackBarService,
     private _route: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
@@ -39,7 +40,7 @@ export class LoginComponent implements OnInit {
       .toPromise()
       .then(session => {
         let session_id = session.session_id;
-
+        this.isLogged = true;
         this._authService.setSession(session_id);
         this._snackBar.open({
           message: 'Log in successfuly!'

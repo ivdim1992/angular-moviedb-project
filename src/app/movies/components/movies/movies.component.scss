@@ -1,9 +1,9 @@
 .popular-movies,
 .top-rated-movies {
-  text-align: center;
-
   &__header {
-    display: inline-block;
+    margin-left: 2rem;
+    font-size: 1.6rem;
+
     margin-top: 1rem;
     margin-bottom: 0;
     font-weight: normal;

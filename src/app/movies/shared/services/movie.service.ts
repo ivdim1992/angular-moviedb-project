@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/shared/services';
   providedIn: 'root'
 })
 export class MovieService {
-  constructor(private _http: HttpClient, private _authService: AuthService) {}
+  constructor(private _http: HttpClient, private _authService: AuthService) { }
 
   getPopularMovies(): Observable<Movie[]> {
     const url = `${MOVIEDB.BASE_URL}movie/popular?api_key=&language=en-US&page=1`;
@@ -31,7 +31,7 @@ export class MovieService {
     return this._http.get<Array<any>>(url).pipe(map(genres => genres));
   }
 
-  getMovieDetails(movieID: number): Observable<MovieDetails> {
+  getMovieDetails(movieID: string): Observable<MovieDetails> {
     const url = `${MOVIEDB.BASE_URL}movie/${movieID}?api_key=${MOVIEDB.APP_KEY}&language=en-US`;
     return this._http.get<IMovieDetails>(url).pipe(map(movie => new MovieDetails(movie)));
   }

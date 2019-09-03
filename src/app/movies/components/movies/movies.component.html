@@ -1,14 +1,20 @@
-<div class="movies-container">
-  <section class="popular-movies">
-    <a [routerLink]="['/', 'movies', 'popular-movies']">
-      <h3 mat-subheader class="popular-movies__header">Popular Movies</h3>
-    </a>
-    <moviedb-list-items [favoriteIDs]="favoriteMoviesIDs" [items]="popularMovies$ | async"></moviedb-list-items>
-  </section>
-  <section class="top-rated-movies">
-    <a [routerLink]="['/', 'movies', 'top-rated-movies']">
-      <h3 mat-subheader class="top-rated-movies__header">Top Rated Movies</h3>
-    </a>
-    <moviedb-list-items [favoriteIDs]="favoriteMoviesIDs" [items]="topRatedMovies$ | async"></moviedb-list-items>
-  </section>
-</div>
+<moviedb-spinner
+  *ngIf="!(popularMovies$ | async)?.length && !(topRatedMovies$ | async)?.length; else movies"
+></moviedb-spinner>
+
+<ng-template #movies>
+  <div class="movies-container">
+    <section class="popular-movies">
+      <a [routerLink]="['/', 'movies', 'popular-movies']">
+        <h3 mat-subheader class="popular-movies__header">Popular Movies</h3>
+      </a>
+      <moviedb-list-items [favoriteIDs]="favoriteMoviesIDs" [items]="popularMovies$ | async"></moviedb-list-items>
+    </section>
+    <section class="top-rated-movies">
+      <a [routerLink]="['/', 'movies', 'top-rated-movies']">
+        <h3 mat-subheader class="top-rated-movies__header">Top Rated Movies</h3>
+      </a>
+      <moviedb-list-items [favoriteIDs]="favoriteMoviesIDs" [items]="topRatedMovies$ | async"></moviedb-list-items>
+    </section>
+  </div>
+</ng-template>

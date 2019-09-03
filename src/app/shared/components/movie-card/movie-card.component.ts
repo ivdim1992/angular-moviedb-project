@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { MovieDetailsComponent } from 'src/app/movies/components';
 import { SnackBarService } from '../../services';
 import { MovieService } from 'src/app/movies/shared/services';
 import { Movie } from '../../models';
+import { MovieDetailsModalComponent } from 'src/app/movies/components';
 
 @Component({
   selector: 'moviedb-movie-card',
@@ -11,12 +11,13 @@ import { Movie } from '../../models';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit, DoCheck {
-  constructor(private _dialog: MatDialog, private _movieService: MovieService, private _snackBar: SnackBarService) {}
+  constructor(private _dialog: MatDialog, private _movieService: MovieService, private _snackBar: SnackBarService) { }
 
   @Input() movie: Movie;
   @Input() favoriteIDs: [];
   IsInFavortie: boolean;
   imagePath: string;
+  btnText = 'View Details';
 
   ngOnInit() {
     this.imagePath = 'https://image.tmdb.org/t/p/w185' + this.movie.imagePath;
@@ -47,7 +48,7 @@ export class MovieCardComponent implements OnInit, DoCheck {
   }
 
   onClicked() {
-    const dialogRef = this._dialog.open(MovieDetailsComponent, {
+    const dialogRef = this._dialog.open(MovieDetailsModalComponent, {
       maxWidth: '800px',
       data: this.movie,
       panelClass: 'movie-dialog'

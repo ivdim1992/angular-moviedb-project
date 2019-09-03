@@ -1,0 +1,15 @@
+<moviedb-spinner *ngIf="!movieDetailsLoaded; else details"></moviedb-spinner>
+
+<ng-template #details>
+  <div class="close-button">
+    <moviedb-mat-close-icon (click)="closeDialog()" class="cursor-pointer"></moviedb-mat-close-icon>
+  </div>
+  <div class="movie-details" [@movieDetailsLoaded]="movieDetailsLoaded">
+    <img src="https://image.tmdb.org/t/p/w342{{ movieDetails?.imagePath }}" alt="" />
+    <h2 class="movie-details__title">{{ movieDetails?.movieTitle }}</h2>
+    <p class="movie-details__description">{{ movieDetails?.description.slice(0, 220) }}...</p>
+  </div>
+  <div class="view-more">
+    <moviedb-button [buttonText]="btnText" [routerLink]="['/movies', data.id]" (click)="closeDialog()"></moviedb-button>
+  </div>
+</ng-template>

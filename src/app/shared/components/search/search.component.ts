@@ -10,14 +10,18 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit {
   formGroup: FormGroup;
 
-  constructor(private _formBuilder: FormBuilder, private _router: Router) {}
+  constructor(private _formBuilder: FormBuilder, private _router: Router) { }
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({
       search: [null, [Validators.required]]
     });
   }
+
   search(values) {
+    if (this.formGroup.invalid) {
+      return;
+    }
     const query = values.search;
     this._router.navigate(['movies/search'], { queryParams: { search: query } });
     this.formGroup.reset();

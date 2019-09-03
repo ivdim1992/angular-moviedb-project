@@ -1,15 +1,19 @@
-<div class="close-button">
-  <span (click)="closeDialog()" class="cursor-pointer">X</span>
-</div>
-<div class="movie-details" [@movieDetailsLoaded]="movieDetailsLoaded">
-  <img src="https://image.tmdb.org/t/p/w342{{ movieDetails?.imagePath }}" alt="" />
-  <h2 class="movie-details__title">{{ movieDetails?.movieTitle }}</h2>
-  <h4>Genres:</h4>
-  <p class="movie-details-genres">
-    {{ movieGenres?.join(',') }}
-  </p>
-  <h4>Description:</h4>
-  <p class="movie-details__description">
-    {{ movieDetails?.description }}
-  </p>
-</div>
+<moviedb-spinner *ngIf="!movieDetailsLoaded; else details"></moviedb-spinner>
+
+<ng-template #details>
+  <div class="details">
+    <div class="details__poster">
+      <img src="https://image.tmdb.org/t/p/w780{{ movieDetails?.imagePath }}" alt="" />
+    </div>
+    <div class="details__details">
+      <h1 class="details__details-header">
+        {{ movieDetails?.movieTitle }} ({{ movieDetails?.releaseDate | date: 'mediumDate' }})
+      </h1>
+      <div class="details__details-budget"><span>Budget:</span> {{ movieDetails?.budget }}</div>
+      <div class="details__details-runtime"><span>Runtime:</span> {{ movieDetails?.runtime }}m.</div>
+      <div class="details__details-averageVote"><span>Average Vote:</span> {{ movieDetails?.voteAverage }}/10</div>
+      <div class="details__details-genres"><span>Genres:</span> {{ movieGenres?.join(', ') }}</div>
+      <div class="details__details-description"><span>Overview:</span> {{ movieDetails?.description }}</div>
+    </div>
+  </div>
+</ng-template>

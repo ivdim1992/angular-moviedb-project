@@ -4,6 +4,7 @@
   box-sizing: border-box;
 }
 body {
+  font-family: 'Lora', seriv;
   height: 100vh;
 }
 
@@ -13,6 +14,10 @@ a {
 }
 
 .mat-sidenav-container {
+  min-height: 100vh;
+}
+
+.mat-drawer-content {
 }
 
 .mat-sidenav-content {

@@ -13,13 +13,14 @@ import { MaterialSharedModule } from '../material/material.module';
     components.MoviesComponent,
     components.PopularMoviesComponent,
     components.TopRatedMoviesComponent,
-    components.MovieDetailsComponent,
     components.SearchMoviesComponent,
-    components.MyListComponent
+    components.MyListComponent,
+    components.MovieDetailsModalComponent,
+    components.MovieDetailsComponent
   ],
   imports: [MoviesRoutingModule, CommonModule, RouterModule, SharedModule, MaterialSharedModule],
   exports: [components.MoviesComponent, components.MyListComponent],
   providers: [services.MovieService],
-  entryComponents: [components.MovieDetailsComponent]
+  entryComponents: [components.MovieDetailsModalComponent]
 })
-export class MoviesModule {}
+export class MoviesModule { }

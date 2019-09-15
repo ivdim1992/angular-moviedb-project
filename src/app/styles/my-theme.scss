@@ -8,10 +8,10 @@ body {
   height: 100%;
 }
 
-$theme-primary: mat-palette($mat-blue, 500);
-$theme-accent: mat-palette($mat-amber, A200, A100, A400);
+$theme-primary: mat-palette($mat-blue, 400);
+$theme-accent: mat-palette($mat-amber, A600, A100, A100);
 $theme-warn: mat-palette($mat-red, 600);
-$theme-black-theme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
+$theme-black-theme: mat-light-theme($theme-primary, $theme-accent, $theme-warn);
 
 $custom-typography: mat-typography-config(
   $font-family: 'Lora , serif'

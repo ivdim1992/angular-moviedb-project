@@ -12,12 +12,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { AuthInterceptor } from './core/interceptors';
 import { MaterialSharedModule } from './material/material.module';
+import { StateTransferInitializerModule } from '@nguniversal/common'
+
 // const modules = [AngularFireAuthModule];
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    StateTransferInitializerModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     CoreModule.forRoot(),
@@ -29,4 +32,4 @@ import { MaterialSharedModule } from './material/material.module';
   exports: [AngularFireAuthModule],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

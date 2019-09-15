@@ -1,12 +1,8 @@
 .popular-movies,
 .top-rated-movies {
-  &__header {
-    margin-left: 2rem;
-    font-size: 1.6rem;
-
-    margin-top: 1rem;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-decoration: underline;
-  }
+  display: flex;
+  margin-bottom: 1rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

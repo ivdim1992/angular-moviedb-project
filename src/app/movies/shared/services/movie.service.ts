@@ -13,31 +13,31 @@ export class MovieService {
   constructor(private _http: HttpClient, private _authService: AuthService) { }
 
   getPopularMovies(): Observable<Movie[]> {
-    const url = `${MOVIEDB.BASE_URL}movie/popular?api_key=&language=en-US&page=1`;
+    const url = `${MOVIEDB.BASE_URL}movie/popular?`;
     return this._http
       .get<Array<IMovieInput>>(url)
       .pipe(map(input => input['results'].map(movies => new Movie(movies))));
   }
 
   getTopRatedMovies(): Observable<Movie[]> {
-    const url = `${MOVIEDB.BASE_URL}movie/top_rated?api_key=&language=en-US&page=1`;
+    const url = `${MOVIEDB.BASE_URL}movie/top_rated?`;
     return this._http
       .get<Array<IMovieInput>>(url)
       .pipe(map(input => input['results'].map(movies => new Movie(movies))));
   }
 
   getGenres(): Observable<Array<any>> {
-    const url = `${MOVIEDB.BASE_URL}genre/list?api_key=&language=en-US`;
+    const url = `${MOVIEDB.BASE_URL}genre/list?`;
     return this._http.get<Array<any>>(url).pipe(map(genres => genres));
   }
 
   getMovieDetails(movieID: string): Observable<MovieDetails> {
-    const url = `${MOVIEDB.BASE_URL}movie/${movieID}?api_key=${MOVIEDB.APP_KEY}&language=en-US`;
+    const url = `${MOVIEDB.BASE_URL}movie/${movieID}?`;
     return this._http.get<IMovieDetails>(url).pipe(map(movie => new MovieDetails(movie)));
   }
 
   searchMovie(query: string): Observable<Array<Movie>> {
-    const url = `${MOVIEDB.BASE_URL}search/movie?api_key=&query=${query}`;
+    const url = `${MOVIEDB.BASE_URL}search/movie?&query=${query}`;
     return this._http.get<Array<Movie>>(url).pipe(map(input => input['results'].map(movies => new Movie(movies))));
   }
 
@@ -56,7 +56,7 @@ export class MovieService {
 
   getFavoriteMovies(): Observable<any> {
     const session = this._authService.getSessionLocalstore();
-    const url = `${MOVIEDB.BASE_URL}account/{account_id}/favorite/movies?api_key=${MOVIEDB.APP_KEY}&session_id=${session}&language=en-US&sort_by=created_at.asc&page=1`;
+    const url = `${MOVIEDB.BASE_URL}account/{account_id}/favorite/movies?&language=en-US&sort_by=created_at.asc&page=1`;
     return this._http.get<Array<Movie>>(url).pipe(map(input => input['results'].map(movies => new Movie(movies))));
   }
 }

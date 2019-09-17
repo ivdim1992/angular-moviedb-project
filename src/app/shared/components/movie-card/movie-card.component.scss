@@ -45,8 +45,8 @@
     background: linear-gradient(
       120deg,
       rgb(100, 100, 110),
-      rgb(20, 30, 30) 20%,
-      rgb(20, 30, 30) 80%,
+      rgb(254, 253, 255) 20%,
+      rgb(254, 253, 255) 70%,
       rgb(100, 100, 110)
     );
 
@@ -65,7 +65,7 @@
     overflow: auto;
 
     &-header {
-      color: #c6a869;
+      color: #000059;
     }
     &-buttons {
       display: flex;

@@ -34,9 +34,24 @@ const modules = [
 ];
 
 @NgModule({
-  declarations: [components.MatIconComponent, components.MaterialSnackbar, components.MatCloseIconComponent, components.MatArrowLeftComponent],
+  declarations: [
+    components.MatIconComponent,
+    components.MaterialSnackbar,
+    components.MatCloseIconComponent,
+    components.MatArrowLeftComponent,
+    components.MatFavoriteBorderComponent,
+    components.MatFavoriteComponent
+  ],
   imports: modules,
-  exports: [...modules, components.MatIconComponent, components.MaterialSnackbar, components.MatCloseIconComponent, components.MatArrowLeftComponent],
+  exports: [
+    ...modules,
+    components.MatIconComponent,
+    components.MaterialSnackbar,
+    components.MatCloseIconComponent,
+    components.MatArrowLeftComponent,
+    components.MatFavoriteBorderComponent,
+    components.MatFavoriteComponent
+  ],
   providers: []
 })
-export class MaterialSharedModule { }
+export class MaterialSharedModule {}

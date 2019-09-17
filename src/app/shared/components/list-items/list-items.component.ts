@@ -8,8 +8,11 @@ import { Movie } from '../../models';
 })
 export class ListItemComponent implements OnInit {
   @Input() items: Movie[];
-  @Input() favoriteIDs: [];
+  @Input() favoriteMoviesIDs: number[];
+
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.favoriteMoviesIDs);
+  }
 }

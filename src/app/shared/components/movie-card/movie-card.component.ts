@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { SnackBarService } from '../../services';
+import { SnackBarService, UserService } from '../../services';
 import { MovieService } from 'src/app/movies/shared/services';
 import { Movie } from '../../models';
 import { MovieDetailsModalComponent } from 'src/app/movies/components';
@@ -11,11 +11,12 @@ import { MovieDetailsModalComponent } from 'src/app/movies/components';
   styleUrls: ['./movie-card.component.scss']
 })
 export class MovieCardComponent implements OnInit, DoCheck {
-  constructor(private _dialog: MatDialog, private _movieService: MovieService, private _snackBar: SnackBarService) { }
+  constructor(private _dialog: MatDialog, private _snackBar: SnackBarService, private _userService: UserService) {}
 
   @Input() movie: Movie;
-  @Input() favoriteIDs: [];
-  IsInFavortie: boolean;
+  @Input() favoriteMoviesIDs: number[];
+
+  IsInFavortie: boolean = false;
   imagePath: string;
   btnText = 'View Details';
 
@@ -24,18 +25,18 @@ export class MovieCardComponent implements OnInit, DoCheck {
   }
 
   ngDoCheck() {
-    if (this.favoriteIDs) {
-      this.favoriteIDs.map(favIds => {
-        this.IsInFavortie = this.movie.id === favIds ? true : false;
-      });
+    if (this.favoriteMoviesIDs) {
+      this.IsInFavortie = this.favoriteMoviesIDs.includes(this.movie.id) ? true : false;
     }
   }
 
   addToFavorites() {
-    this._movieService
-      .getUserIdAndMarkAsFavorite(this.movie.id)
+    this._userService
+      .addToFavorites(this.movie.id)
       .toPromise()
       .then(_ => {
+        debugger;
+        this.IsInFavortie = true;
         this._snackBar.open({
           message: 'Successfuly added to favorites'
         });

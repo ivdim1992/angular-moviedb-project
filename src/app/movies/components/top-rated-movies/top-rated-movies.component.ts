@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Movie } from 'src/app/shared/models';
 import { MovieService } from '../../shared/services';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'moviedb-top-rated-movies',
@@ -9,11 +10,27 @@ import { MovieService } from '../../shared/services';
   styleUrls: ['./top-rated-movies.component.scss']
 })
 export class TopRatedMoviesComponent implements OnInit {
-  constructor(private _moviesService: MovieService) {}
+  constructor(private _movieService: MovieService) {}
 
-  topRatedMovies$: Observable<Array<Movie>>;
+  private destroy$ = new Subject<boolean>();
+  favoriteMoviesIDs: number[] = [];
+  topRatedMovies: Movie[];
 
   ngOnInit() {
-    this.topRatedMovies$ = this._moviesService.getTopRatedMovies();
+    this._movieService
+      .getTopRatedMovies()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(movies => {
+        this.topRatedMovies = movies;
+      });
+
+    // this._movieService
+    //   .getFavoriteMovies()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe(movies => {
+    //     movies.map(movie => {
+    //       this.favoriteMoviesIDs.push(movie.id);
+    //     });
+    //   });
   }
 }

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Movie } from 'src/app/shared/models';
 import { MovieService } from '../../shared/services';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'moviedb-popular-movies',
@@ -10,10 +11,26 @@ import { MovieService } from '../../shared/services';
 })
 export class PopularMoviesComponent implements OnInit {
   constructor(private _movieService: MovieService) {}
+  private destroy$ = new Subject<boolean>();
 
-  popularMovies$: Observable<Array<Movie>>;
+  popularMovies: Movie[];
+  favoriteMoviesIDs: number[] = [];
 
   ngOnInit() {
-    this.popularMovies$ = this._movieService.getPopularMovies();
+    this._movieService
+      .getPopularMovies()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(movies => {
+        this.popularMovies = movies;
+      });
+
+    // this._movieService
+    //   .getFavoriteMovies()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe(movies => {
+    //     movies.map(movie => {
+    //       this.favoriteMoviesIDs.push(movie.id);
+    //     });
+    //   });
   }
 }

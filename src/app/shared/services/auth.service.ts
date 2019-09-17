@@ -12,9 +12,6 @@ import { IUser } from '../models';
   providedIn: 'root'
 })
 export class AuthService {
-  currentUser$ = new BehaviorSubject<any>(null);
-  private _destroy = new Subject<boolean>();
-
   constructor(
     public _afAuth: AngularFireAuth,
     public _router: Router,

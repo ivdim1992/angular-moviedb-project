@@ -10,9 +10,15 @@ import * as services from './services';
 import * as components from './components';
 
 @NgModule({
-  declarations: [components.MovieCardComponent, components.ListItemComponent, components.SearchComponent, components.ButtonComponent, components.SpinnerComponent],
+  declarations: [
+    components.MovieCardComponent,
+    components.ListItemComponent,
+    components.SearchComponent,
+    components.ButtonComponent,
+    components.SpinnerComponent
+  ],
   imports: [HttpClientModule, MaterialSharedModule, FormsModule, FlexLayoutModule, CommonModule, ReactiveFormsModule],
-  providers: [services.AuthService, services.SnackBarService],
+  providers: [services.AuthService, services.SnackBarService, services.UserService],
   exports: [
     components.MovieCardComponent,
     components.SearchComponent,
@@ -25,4 +31,4 @@ import * as components from './components';
   ],
   entryComponents: []
 })
-export class SharedModule { }
+export class SharedModule {}

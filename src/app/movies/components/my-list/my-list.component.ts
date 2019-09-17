@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/shared/models';
-import { MovieService } from '../../shared/services';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { UserService } from 'src/app/shared/services';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'moviedb-my-list',
@@ -9,12 +10,18 @@ import { Observable } from 'rxjs';
   styleUrls: ['./my-list.component.scss']
 })
 export class MyListComponent implements OnInit {
-  myFavoriteMovies$: Observable<Array<Movie>>;
+  myFavoriteMovies: Movie[];
   imagePath: string;
-  constructor(private _movieService: MovieService) {}
+  private _destroy = new Subject<boolean>();
+  constructor(private _userService: UserService) {}
 
   ngOnInit() {
     this.imagePath = 'https://image.tmdb.org/t/p/w92';
-    this.myFavoriteMovies$ = this._movieService.getFavoriteMovies();
+    this._userService
+      .getFavoriteMovies()
+      .pipe(takeUntil(this._destroy))
+      .subscribe(movies => {
+        this.myFavoriteMovies = movies;
+      });
   }
 }

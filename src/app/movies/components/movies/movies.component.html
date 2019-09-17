@@ -1,6 +1,4 @@
-<moviedb-spinner
-  *ngIf="!(popularMovies$ | async)?.length && !(topRatedMovies$ | async)?.length; else movies"
-></moviedb-spinner>
+<moviedb-spinner *ngIf="!popularMovies?.length && !topRatedMovies?.length; else movies"></moviedb-spinner>
 
 <ng-template #movies>
   <div class="movies-container">
@@ -20,8 +18,8 @@
         </section>
       </mat-drawer>
       <mat-drawer-content>
-        <moviedb-list-items [favoriteIDs]="favoriteMoviesIDs" [items]="popularMovies$ | async"></moviedb-list-items>
-        <moviedb-list-items [favoriteIDs]="favoriteMoviesIDs" [items]="topRatedMovies$ | async"></moviedb-list-items>
+        <moviedb-list-items [favoriteMoviesIDs]="favoriteMoviesIDs" [items]="popularMovies"></moviedb-list-items>
+        <moviedb-list-items [favoriteMoviesIDs]="favoriteMoviesIDs" [items]="topRatedMovies"></moviedb-list-items>
       </mat-drawer-content>
     </mat-drawer-container>
   </div>

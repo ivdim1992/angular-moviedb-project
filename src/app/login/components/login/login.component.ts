@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService, SnackBarService } from 'src/app/shared/services';
+import { AuthService, SnackBarService, UserService } from 'src/app/shared/services';
 import { PasswordLengthValidator } from 'src/app/shared/validators';
 import { catchError } from 'rxjs/operators';
 
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     private _authService: AuthService,
     private _snackBar: SnackBarService,
     private _route: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.formGroup = this._formBuilder.group({

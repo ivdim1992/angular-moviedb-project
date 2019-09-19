@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '../core/guards';
-import { TopRatedMoviesComponent, PopularMoviesComponent, SearchMoviesComponent, MovieDetailsComponent } from './components';
+import {
+  TopRatedMoviesComponent,
+  PopularMoviesComponent,
+  SearchMoviesComponent,
+  MovieDetailsComponent,
+  MyListComponent
+} from './components';
 
 const routes: Routes = [
   {
@@ -16,13 +22,18 @@ const routes: Routes = [
     data: { animation: PopularMoviesComponent }
   },
   {
+    path: 'my-list',
+    component: MyListComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'search',
     component: SearchMoviesComponent
   },
   {
     path: ':id',
     component: MovieDetailsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard]
   }
 ];
 
@@ -30,4 +41,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class MoviesRoutingModule { }
+export class MoviesRoutingModule {}

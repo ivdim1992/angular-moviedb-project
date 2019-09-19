@@ -12,7 +12,5 @@ export class ListItemComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-    console.log(this.favoriteMoviesIDs);
-  }
+  ngOnInit() {}
 }

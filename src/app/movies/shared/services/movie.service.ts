@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Movie, IMovieInput, MovieDetails, IMovieDetails } from 'src/app/shared/models';
 import { MOVIEDB } from 'src/app/app.config';
-import { AuthService } from 'src/app/shared/services';
 
 @Injectable({
   providedIn: 'root'

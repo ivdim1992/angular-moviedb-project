@@ -40,8 +40,9 @@ export class LoginComponent implements OnInit {
       .toPromise()
       .then(session => {
         let session_id = session.session_id;
-        this.isLogged = true;
         this._authService.setSession(session_id);
+        localStorage.setItem('isLogged', 'true');
+        this.isLogged = true;
         this._snackBar.open({
           message: 'Log in successfuly!'
         });

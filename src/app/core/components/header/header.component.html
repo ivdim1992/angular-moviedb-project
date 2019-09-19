@@ -11,7 +11,7 @@
     <div *ngIf="session">
       <!-- <span class="toolbar__row-welcome-user">Welcome, {{ userEmail }}!</span> -->
       <span class="my-list">
-        <a [routerLink]="['my-list']">My List</a>
+        <a [routerLink]="['movies', 'my-list']">My List</a>
       </span>
       <span class="logout">
         <a (click)="logoutUser()">Logout</a>

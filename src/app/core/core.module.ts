@@ -8,10 +8,21 @@ import * as components from './components';
 import * as guards from './guards';
 
 import { MovieService } from '../movies/shared/services';
+import { StoreModule } from '@ngrx/store';
+import { movieReducers } from './store/reducers/movie.reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { MovieEffects } from './store/effects/movie.effects';
 
 @NgModule({
   declarations: [components.HeaderComponent, components.HomeComponent, components.FooterComponent],
-  imports: [CommonModule, RouterModule, SharedModule, MoviesModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    SharedModule,
+    MoviesModule,
+    StoreModule.forFeature('movies', movieReducers),
+    EffectsModule.forFeature([MovieEffects])
+  ],
   exports: [components.HeaderComponent, components.HomeComponent, components.FooterComponent],
   providers: [guards.AuthGuard, guards.AuthenticatedGuard]
 })

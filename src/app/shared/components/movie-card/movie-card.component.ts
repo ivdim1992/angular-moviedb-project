@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, DoCheck } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { SnackBarService, UserService } from '../../services';
-import { MovieService } from 'src/app/movies/shared/services';
 import { Movie } from '../../models';
 import { MovieDetailsModalComponent } from 'src/app/movies/components';
 
@@ -19,13 +18,15 @@ export class MovieCardComponent implements OnInit, DoCheck {
   IsInFavortie: boolean = false;
   imagePath: string;
   btnText = 'View Details';
+  session: string = localStorage.getItem('session');
+  isLogged: string = localStorage.getItem('isLogged');
 
   ngOnInit() {
     this.imagePath = 'https://image.tmdb.org/t/p/w185' + this.movie.imagePath;
   }
 
   ngDoCheck() {
-    if (this.favoriteMoviesIDs) {
+    if (this.isLogged && this.favoriteMoviesIDs) {
       this.IsInFavortie = this.favoriteMoviesIDs.includes(this.movie.id) ? true : false;
     }
   }
@@ -35,15 +36,9 @@ export class MovieCardComponent implements OnInit, DoCheck {
       .addToFavorites(this.movie.id)
       .toPromise()
       .then(_ => {
-        debugger;
         this.IsInFavortie = true;
         this._snackBar.open({
           message: 'Successfuly added to favorites'
-        });
-      })
-      .catch(err => {
-        this._snackBar.open({
-          message: 'You have to be logged in to add to favorites!'
         });
       });
   }

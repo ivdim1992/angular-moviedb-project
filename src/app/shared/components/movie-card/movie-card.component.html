@@ -7,7 +7,10 @@
       <h3 class="flipcard_description-header">{{ movie.title }}</h3>
       <div class="flipcard_description-buttons">
         <moviedb-button [buttonText]="btnText" (click)="onClicked()"></moviedb-button>
-        <moviedb-mat-favorite-border (click)="addToFavorites()" *ngIf="!IsInFavortie"></moviedb-mat-favorite-border>
+        <moviedb-mat-favorite-border
+          (click)="addToFavorites()"
+          *ngIf="!IsInFavortie && isLogged"
+        ></moviedb-mat-favorite-border>
         <moviedb-mat-favorite *ngIf="IsInFavortie"></moviedb-mat-favorite>
       </div>
     </div>

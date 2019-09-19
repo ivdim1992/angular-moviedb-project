@@ -1,12 +1,11 @@
-<div class="my-list" *ngIf="myFavoriteMovies?.length; else noItems">
-  <div class="my-list-item" *ngFor="let movie of myFavoriteMovies">
+<div class="my-list" *ngIf="(myFavoriteMovies$ | async)?.length; else noItems">
+  <div class="my-list-item" *ngFor="let movie of myFavoriteMovies$ | async">
     <h4 class="my-list-item_header">{{ movie.title }}</h4>
     <div class="my-list-item_img">
       <img src="{{ imagePath + movie.imagePath }}" />
     </div>
   </div>
 </div>
-
 <ng-template #noItems>
   <div class="noFavorites">You do not have favourite movies yet!!!</div>
 </ng-template>

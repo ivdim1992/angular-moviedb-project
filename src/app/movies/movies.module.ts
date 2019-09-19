@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MoviesRoutingModule } from './movies-routing.module';
-
-import * as components from './components';
-import * as services from './shared/services';
 import { MaterialSharedModule } from '../material/material.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '../core/interceptors';
+
+import * as components from './components';
+import * as services from './shared/services';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,8 @@ import { AuthInterceptor } from '../core/interceptors';
     components.MovieDetailsComponent
   ],
   imports: [MoviesRoutingModule, CommonModule, RouterModule, SharedModule, MaterialSharedModule],
-  exports: [components.MoviesComponent, components.MyListComponent],
+  exports: [components.MoviesComponent],
   providers: [services.MovieService, { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   entryComponents: [components.MovieDetailsModalComponent]
 })
-export class MoviesModule { }
+export class MoviesModule {}

@@ -12,6 +12,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { AuthInterceptor } from './core/interceptors';
 import { MaterialSharedModule } from './material/material.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 // const modules = [AngularFireAuthModule];
 
@@ -24,6 +26,8 @@ import { MaterialSharedModule } from './material/material.module';
     CoreModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase, 'moviedb-project'),
     MaterialSharedModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     AngularFireAuthModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

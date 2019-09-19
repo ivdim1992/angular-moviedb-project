@@ -1,8 +1,8 @@
-<moviedb-spinner *ngIf="!topRatedMovies?.length; else topRated"></moviedb-spinner>
+<moviedb-spinner *ngIf="!(topRatedMovies$ | async)?.length; else topRated"></moviedb-spinner>
 
 <ng-template #topRated>
   <section class="top-rated-movies-container">
     <h3 mat-subheader class="top-rated-movies__header">Top Rated Movies</h3>
-    <moviedb-list-items [favoriteMoviesIDs]="favoriteMoviesIDs" [items]="topRatedMovies"></moviedb-list-items>
+    <moviedb-list-items [favoriteMoviesIDs]="favoriteMoviesIDs" [items]="topRatedMovies$ | async"></moviedb-list-items>
   </section>
 </ng-template>

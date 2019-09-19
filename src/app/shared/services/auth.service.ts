@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
-import { switchMap, first, tap, takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import { SnackBarService } from 'src/app/shared/services/snack-bar.service';
 import { MOVIEDB } from 'src/app/app.config';
 import { HttpClient } from '@angular/common/http';
-import { IUser } from '../models';
 
 @Injectable({
   providedIn: 'root'
@@ -55,11 +54,18 @@ export class AuthService {
   }
 
   getSessionLocalstore(): string {
-    let session_id = localStorage.getItem('session_id');
-    if (!session_id) {
+    let session = localStorage.getItem('session_id');
+    if (!session) {
       return null;
     }
-    return session_id;
+    return session;
+  }
+
+  setUserLocalstore(user) {
+    if (!user) {
+      localStorage.setItem('user', null);
+    }
+    localStorage.setItem('user', user);
   }
 
   logout() {

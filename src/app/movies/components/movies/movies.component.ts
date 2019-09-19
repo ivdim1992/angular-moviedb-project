@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { MovieState } from 'src/app/core/store/reducers/movie.reducers';
+import { LoadPopularMovies, LoadTopRatedMovies } from 'src/app/core/store/actions/movie.actions';
+import { selectPopularMovies, selectTopRatedMovies } from 'src/app/core/store/index';
 import { Movie } from 'src/app/shared/models';
-import { MovieService } from '../../shared/services';
-import { AuthService, UserService } from 'src/app/shared/services';
+import { share, takeUntil, map } from 'rxjs/operators';
+import { UserService } from 'src/app/shared/services';
 
 @Component({
   selector: 'moviedb-movies',
@@ -11,41 +14,25 @@ import { AuthService, UserService } from 'src/app/shared/services';
   styleUrls: ['./movies.component.scss']
 })
 export class MoviesComponent implements OnInit {
-  constructor(
-    private _movieService: MovieService,
-    private _authService: AuthService,
-    private _userService: UserService
-  ) {}
+  constructor(private _store: Store<MovieState>, private _userService: UserService) {}
 
   listAnimation: boolean = false;
-  popularMovies: Movie[];
-  topRatedMovies: Movie[];
+  topRatedMovies$: Observable<Movie[]> = this._store.select(selectTopRatedMovies);
+  popularMovies$: Observable<Movie[]> = this._store.select(selectPopularMovies);
   favoriteMoviesIDs: number[] = [];
-  private destroy$ = new Subject<boolean>();
+  isLogged: string = localStorage.getItem('isLogged');
+  private _destroy$ = new Subject<boolean>();
 
   ngOnInit() {
-    this._movieService
-      .getPopularMovies()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(movies => {
-        this.popularMovies = movies.slice(0, 5);
-      });
+    this._store.dispatch(new LoadTopRatedMovies());
+    this._store.dispatch(new LoadPopularMovies());
 
-    this._movieService
-      .getTopRatedMovies()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(movies => {
-        this.topRatedMovies = movies.slice(0, 5);
-      });
-
-    if (this._userService.currentUser) {
+    if (this.isLogged) {
       this._userService
         .getFavoriteMovies()
-        .pipe(takeUntil(this.destroy$))
+        .pipe(takeUntil(this._destroy$))
         .subscribe(movies => {
-          movies.map(movie => {
-            this.favoriteMoviesIDs.push(movie.id);
-          });
+          movies.map(movie => this.favoriteMoviesIDs.push(movie.id));
         });
     }
   }

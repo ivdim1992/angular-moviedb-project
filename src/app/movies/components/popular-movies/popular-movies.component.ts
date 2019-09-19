@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Movie } from 'src/app/shared/models';
-import { MovieService } from '../../shared/services';
+import { LoadPopularMovies } from 'src/app/core/store/actions/movie.actions';
+import { selectPopularMovies } from 'src/app/core/store/index';
+import { Store } from '@ngrx/store';
+import { MovieState } from 'src/app/core/store/reducers/movie.reducers';
+import { UserService } from 'src/app/shared/services';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -10,27 +14,23 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./popular-movies.component.scss']
 })
 export class PopularMoviesComponent implements OnInit {
-  constructor(private _movieService: MovieService) {}
-  private destroy$ = new Subject<boolean>();
+  constructor(private _store: Store<MovieState>, private _userService: UserService) {}
 
-  popularMovies: Movie[];
+  popularMovies$: Observable<Movie[]> = this._store.select(selectPopularMovies);
+  isLogged: string = localStorage.getItem('isLogged');
+  private _destroy$ = new Subject<boolean>();
   favoriteMoviesIDs: number[] = [];
 
   ngOnInit() {
-    this._movieService
-      .getPopularMovies()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe(movies => {
-        this.popularMovies = movies;
-      });
+    this._store.dispatch(new LoadPopularMovies());
 
-    // this._movieService
-    //   .getFavoriteMovies()
-    //   .pipe(takeUntil(this.destroy$))
-    //   .subscribe(movies => {
-    //     movies.map(movie => {
-    //       this.favoriteMoviesIDs.push(movie.id);
-    //     });
-    //   });
+    if (this.isLogged) {
+      this._userService
+        .getFavoriteMovies()
+        .pipe(takeUntil(this._destroy$))
+        .subscribe(movies => {
+          movies.map(movie => this.favoriteMoviesIDs.push(movie.id));
+        });
+    }
   }
 }

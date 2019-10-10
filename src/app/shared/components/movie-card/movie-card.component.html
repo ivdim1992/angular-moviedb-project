@@ -1,0 +1,18 @@
+<div class="flipcard">
+  <div class="flipcard_front">
+    <img src="{{ imagePath }}" alt="movie" />
+  </div>
+  <div class="flipcard_back">
+    <div class="flipcard_description">
+      <h3 class="flipcard_description-header">{{ movie.title }}</h3>
+      <div class="flipcard_description-buttons">
+        <moviedb-button [buttonText]="btnText" (click)="onClicked()"></moviedb-button>
+        <moviedb-mat-favorite-border
+          (click)="addToFavorites()"
+          *ngIf="(isLogged | async) && !isInFavortie"
+        ></moviedb-mat-favorite-border>
+        <moviedb-mat-favorite *ngIf="isInFavortie && favoriteMoviesIds"></moviedb-mat-favorite>
+      </div>
+    </div>
+  </div>
+</div>

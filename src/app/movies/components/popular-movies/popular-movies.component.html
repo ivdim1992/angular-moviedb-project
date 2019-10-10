@@ -1,0 +1,11 @@
+<moviedb-spinner *ngIf="isLoading"></moviedb-spinner>
+<section
+  class="search-results popular-movies-container"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+>
+  <h3 mat-subheader class="sidenav-container__popular-movies-header">Popular Movies</h3>
+  <moviedb-list-items [items]="popularMovies$ | async"></moviedb-list-items>
+</section>

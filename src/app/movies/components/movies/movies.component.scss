@@ -1,0 +1,8 @@
+.popular-movies,
+.top-rated-movies {
+  display: flex;
+  margin-bottom: 1rem;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -1,0 +1,21 @@
+<moviedb-spinner *ngIf="isLoading"></moviedb-spinner>
+
+<div class="details">
+  <div class="details__poster">
+    <img src="https://image.tmdb.org/t/p/w780{{ (movieDetails$ | async)?.imagePath }}" alt="" />
+  </div>
+  <div class="details__details">
+    <h1 class="details__details-header">
+      {{ (movieDetails$ | async)?.movieTitle }} ({{ (movieDetails$ | async)?.releaseDate | date: 'mediumDate' }})
+    </h1>
+    <div class="details__details-budget"><span>Budget:</span> {{ (movieDetails$ | async)?.budget }}</div>
+    <div class="details__details-runtime"><span>Runtime:</span> {{ (movieDetails$ | async)?.runtime }}m.</div>
+    <div class="details__details-averageVote">
+      <span>Average Vote:</span> {{ (movieDetails$ | async)?.voteAverage }}/10
+    </div>
+    <div class="details__details-genres" *ngFor="let item of (movieDetails$ | async)?.genres">
+      <span>Genres:</span> {{ item.name }}
+    </div>
+    <div class="details__details-description"><span>Overview:</span> {{ (movieDetails$ | async)?.description }}</div>
+  </div>
+</div>

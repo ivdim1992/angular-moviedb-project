@@ -1,0 +1,47 @@
+.details {
+  display: flex;
+  justify-content: center;
+  width: 80%;
+  margin: 0 auto;
+
+  &__poster {
+    flex: 0 1 50%;
+  }
+
+  &__details {
+    padding: 2rem;
+    flex: 0 1 50%;
+    min-height: 100%;
+    max-width: 50%;
+
+    & span {
+      font-weight: bold;
+    }
+
+    &-header {
+    }
+
+    &-budget {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    &-runtime {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    &-averageVote {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    &-genres {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+    }
+    &-description {
+      font-size: 1.1rem;
+    }
+  }
+}

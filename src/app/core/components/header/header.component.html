@@ -1,0 +1,23 @@
+<mat-toolbar class="toolbar">
+  <mat-toolbar-row class="toolbar__row">
+    <span>
+      <a mat-tab-link [routerLink]="'/'">
+        <moviedb-mat-icon></moviedb-mat-icon>
+      </a>
+    </span>
+    <span class="toolbar__row-logo">movieDB</span>
+    <span class="example-spacer"></span>
+    <moviedb-search></moviedb-search>
+    <div *ngIf="isLogged | async">
+      <span class="my-list">
+        <a [routerLink]="['movies', 'my-list']">My List</a>
+      </span>
+      <span class="logout">
+        <a (click)="logoutUser()">Logout</a>
+      </span>
+    </div>
+    <span *ngIf="!(isLogged | async)" class="login">
+      <a [routerLink]="['login']">Login</a>
+    </span>
+  </mat-toolbar-row>
+</mat-toolbar>

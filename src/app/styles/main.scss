@@ -1,0 +1,51 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Lora', seriv;
+  height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: #000059;
+}
+
+.mat-sidenav-container {
+  min-height: 100vh;
+}
+
+.mat-drawer-inner-container {
+  padding: 2rem;
+  background: #9e9edf30;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+.mat-drawer {
+  border: none !important;
+}
+
+.mat-sidenav-content {
+  overflow: hidden !important;
+}
+
+.mat-drawer-content {
+  min-height: 100vh;
+}
+
+.mat-dialog-container {
+  background: #ffffff;
+}
+.mat-snack-bar-container {
+  background: #ffffff;
+}
+.mat-simple-snackbar {
+  color: #000000;
+}
+
+.mat-form-field {
+  margin-bottom: 1.5rem;
+}

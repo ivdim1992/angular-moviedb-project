@@ -1,0 +1,15 @@
+@import './app/styles/my-theme.scss';
+@import './app//styles/main.scss';
+
+// .app-theme2-theme {
+//   $alternate-primary: mat-palette($mat-indigo, 500);
+//   $alternate-accent: mat-palette($mat-indigo, 100);
+//   $alternate-warn: mat-palette($mat-indigo, 100);
+//   $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $alternate-warn);
+//   @include angular-material-theme($alternate-theme);
+// }
+
+// @mixin custom-components-theme($theme) {
+//   @include big-input-theme($theme);
+//   @include flip-toggle-button-theme($theme);
+// }

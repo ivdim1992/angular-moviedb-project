@@ -17,13 +17,14 @@ export class TopRatedMoviesComponent implements OnInit, OnDestroy {
   topRatedMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectTopRatedMovies);
   isLoading: boolean;
   subscription: Subscription;
-  page: number = 1;
+  page: number;
 
   ngOnInit() {
     this.subscription = this._store.select(moviesSelector.selectLoadingProp).subscribe(loadingVal => {
       this.isLoading = loadingVal;
     });
-    this._store.dispatch(new fromMoviesActions.GetTopRatedMovies(1));
+    this.page = 2;
+    this._store.dispatch(new fromMoviesActions.GetTopRatedMovies(this.page));
   }
 
   onScroll() {

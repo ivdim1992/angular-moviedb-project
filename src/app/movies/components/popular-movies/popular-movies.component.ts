@@ -17,13 +17,14 @@ export class PopularMoviesComponent implements OnInit, OnDestroy {
   popularMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectPopularMovies);
   isLoading: boolean;
   subscription: Subscription;
-  page: number = 1;
+  page: number;
 
   ngOnInit() {
     this.subscription = this._store.select(moviesSelector.selectLoadingProp).subscribe(loadingVal => {
       this.isLoading = loadingVal;
     });
-    this._store.dispatch(new fromMoviesActions.GetPopularMovies(1));
+    this.page = 2;
+    this._store.dispatch(new fromMoviesActions.GetPopularMovies(this.page));
   }
 
   onScroll() {

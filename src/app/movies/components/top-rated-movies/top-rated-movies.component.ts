@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { Movie } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
-import * as moviesSelector from '../../store/movies.selectors';
-import * as fromAppStore from '../../../store/store.reducer';
-import * as fromMoviesActions from '../../store/movies.actions';
+import * as moviesSelector from '@movieStore/movies.selectors';
+import * as fromMoviesActions from '@movieStore/movies.actions';
+import * as fromAppStore from '@appStore/store.reducer';
 
 @Component({
   selector: 'moviedb-top-rated-movies',

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Movie } from 'src/app/shared/models';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as fromMoviesActions from '../../store/movies.actions';
-import * as fromAppStore from '../../../store/store.reducer';
-import * as fromMoviesSelectors from '../../store/movies.selectors';
+import * as fromMoviesActions from '@movieStore/movies.actions';
+import * as fromMoviesSelectors from '@movieStore/movies.selectors';
+import * as fromAppStore from '@appStore/store.reducer';
 
 @Component({
   selector: 'moviedb-search-movies',

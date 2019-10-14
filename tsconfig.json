@@ -3,6 +3,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "downlevelIteration": true,
+    "paths": {
+      "@movieStore/*": ["src/app/movies/store/*"],
+      "@appStore/*": ["src/app/store/*"]
+    },
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,

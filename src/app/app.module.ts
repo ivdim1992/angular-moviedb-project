@@ -10,11 +10,9 @@ import { CoreModule } from './core/core.module';
 import { AuthInterceptor } from './core/interceptors';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { MoviesEffects } from './movies/store/movies.effects';
 import { StoreRouterConnectingModule, RouterStateSerializer } from '@ngrx/router-store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
-import { AuthEffects } from './login/store/auth.effects';
 import { CustomSerializer } from './store/router-serializer';
 import { appConfig } from './app.config';
 import * as fromAppStore from './store/store.reducer';
@@ -28,7 +26,7 @@ import * as injectionTokens from './injection-token';
     AppRoutingModule,
     CoreModule.forRoot(),
     StoreModule.forRoot(fromAppStore.storeReducer),
-    EffectsModule.forRoot([AuthEffects, MoviesEffects]),
+    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot({ serializer: CustomSerializer })
   ],

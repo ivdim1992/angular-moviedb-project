@@ -5,8 +5,8 @@ import { SnackBarService, UserService } from '../../services';
 import { Movie } from '../../models';
 import { MovieDetailsModalComponent } from 'src/app/movies/components';
 import { Observable } from 'rxjs';
-import * as fromAppStore from '../../../store/store.reducer';
-import * as fromAuthSelectors from '../../../login/store/auth.selectors';
+import * as fromAppStore from '@appStore/store.reducer';
+import * as fromAuthSelectors from '@authStore/auth.selectors';
 
 @Component({
   selector: 'moviedb-movie-card',
@@ -37,22 +37,8 @@ export class MovieCardComponent implements OnInit {
     }
   }
 
-  //   ngOnChanges(changes: SimpleChanges) {
-  //     const { favoriteMoviesIds, movie } = changes;
-  //     if (favoriteMoviesIds && favoriteMoviesIds.currentValue) {
-  //       favoriteMoviesIds.currentValue.map((id: number) => {
-  //         if (movie.currentValue.id === id) {
-  //           this.isInFavortie = true;
-  //         } else {
-  //           this.isInFavortie = false;
-  //         }
-  //       });
-  //     }
-  //   }
-
   addToFavorites() {
     this._userService.addToFavorites(this.movie.id).subscribe(res => {
-      this.isInFavortie = true;
       if (res['status_message']) {
         this._snackBar.open({
           message: 'Successfuly added to favorites'

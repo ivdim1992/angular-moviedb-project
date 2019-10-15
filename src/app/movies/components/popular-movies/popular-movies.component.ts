@@ -15,14 +15,11 @@ export class PopularMoviesComponent implements OnInit, OnDestroy {
   constructor(private _store: Store<fromAppStore.AppState>) {}
 
   popularMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectPopularMovies);
-  isLoading: boolean;
+  isLoading: Observable<boolean> = this._store.select(moviesSelector.selectLoadingProp);
   subscription: Subscription;
   page: number;
 
   ngOnInit() {
-    this.subscription = this._store.select(moviesSelector.selectLoadingProp).subscribe(loadingVal => {
-      this.isLoading = loadingVal;
-    });
     this.page = 2;
     this._store.dispatch(new fromMoviesActions.GetPopularMovies(this.page));
   }
@@ -33,6 +30,6 @@ export class PopularMoviesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    // this.subscription.unsubscribe();
   }
 }

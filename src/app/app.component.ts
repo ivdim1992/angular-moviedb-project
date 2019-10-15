@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { slideInAnimation } from './constants/route-animation';
 import { Store } from '@ngrx/store';
-import * as fromAppStore from './store/store.reducer';
-import * as fromAuthActions from './login/store/auth.actions';
+import * as fromAppStore from '@appStore/store.reducer';
+import * as fromAuthActions from '@authStore/auth.actions';
 
 @Component({
   selector: 'app-root',

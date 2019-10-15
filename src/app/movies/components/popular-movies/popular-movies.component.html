@@ -1,4 +1,4 @@
-<moviedb-spinner *ngIf="isLoading"></moviedb-spinner>
+<moviedb-spinner *ngIf="isLoading | async"></moviedb-spinner>
 <section
   class="search-results popular-movies-container"
   infiniteScroll

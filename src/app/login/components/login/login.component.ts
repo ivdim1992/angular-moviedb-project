@@ -4,9 +4,9 @@ import { SnackBarService } from 'src/app/shared/services';
 import { PasswordLengthValidator } from 'src/app/shared/validators';
 import { Subscription, Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as fromAppStore from '../../../store/store.reducer';
-import * as fromAuthActions from '../../store/auth.actions';
-import * as fromAuthSelectors from '../../store/auth.selectors';
+import * as fromAppStore from '@appStore/store.reducer';
+import * as fromAuthActions from '@authStore/auth.actions';
+import * as fromAuthSelectors from '@authStore/auth.selectors';
 
 @Component({
   selector: 'moviedb-login',

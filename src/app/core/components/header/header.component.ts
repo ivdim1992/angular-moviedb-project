@@ -2,9 +2,9 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 
-import * as fromAppStore from '../../../store/store.reducer';
-import * as fromAuthActions from '../../../login/store/auth.actions';
-import * as fromAuthSelectors from '../../../login/store/auth.selectors';
+import * as fromAppStore from '@appStore/store.reducer';
+import * as fromAuthActions from '@authStore/auth.actions';
+import * as fromAuthSelectors from '@authStore/auth.selectors';
 
 @Component({
   selector: 'moviedb-header',

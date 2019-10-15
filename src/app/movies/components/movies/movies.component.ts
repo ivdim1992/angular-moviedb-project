@@ -16,25 +16,9 @@ export class MoviesComponent implements OnInit {
 
   popularMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectPopularMovies);
   topRatedMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectTopRatedMovies);
-  //   myFavoriteMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectFavoriteMovies);
-  //   favoriteMoviesIds: number[] = [];
-  //   favoriteSub: Subscription;
 
   ngOnInit() {
     this._store.dispatch(new fromMoviesActions.GetPopularMovies(1));
     this._store.dispatch(new fromMoviesActions.GetTopRatedMovies(1));
-    // this._store.dispatch(new fromMoviesActions.GetFavoriteMovies());
-
-    // this.favoriteSub = this.myFavoriteMovies$.subscribe(movies => {
-    //   if (!movies) {
-    //     return null;
-    //   } else {
-    //     return movies.map(movie => this.favoriteMoviesIds.push(movie.id));
-    //   }
-    // });
   }
-
-  //   ngOnDestroy() {
-  //     this.favoriteSub.unsubscribe();
-  //   }
 }

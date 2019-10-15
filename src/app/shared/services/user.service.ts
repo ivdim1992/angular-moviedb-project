@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map, exhaustMap, take } from 'rxjs/operators';
 
-import * as fromAppStore from '../../store/store.reducer';
-import * as fromAuthSelectors from '../../login/store/auth.selectors';
+import * as fromAppStore from '@appStore/store.reducer';
+import * as fromAuthSelectors from '@authStore/auth.selectors';
 
 import { Store } from '@ngrx/store';
 import { APP_CONFIG } from 'src/app/injection-token';

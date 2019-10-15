@@ -3,8 +3,8 @@ import { CanActivate, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { take } from 'rxjs/operators';
-import * as fromAuthSelectors from '../../login/store/auth.selectors';
-import * as fromAppStore from '../../store/store.reducer';
+import * as fromAuthSelectors from '@authStore/auth.selectors';
+import * as fromAppStore from '@appStore/store.reducer';
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {

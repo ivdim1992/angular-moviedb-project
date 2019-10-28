@@ -20,12 +20,8 @@
         </section>
       </mat-drawer>
       <mat-drawer-content>
-        <moviedb-list-items [items]="(popularMovies$ | async)?.slice(0, 5)" [favoriteMoviesIds]="favoriteMoviesIds">
-        </moviedb-list-items>
-        <moviedb-list-items
-          [items]="(topRatedMovies$ | async)?.slice(0, 5)"
-          [favoriteMoviesIds]="favoriteMoviesIds"
-        ></moviedb-list-items>
+        <moviedb-list-items [items]="(popularMovies$ | async)?.slice(0, 5)"> </moviedb-list-items>
+        <moviedb-list-items [items]="(topRatedMovies$ | async)?.slice(0, 5)"></moviedb-list-items>
       </mat-drawer-content>
     </mat-drawer-container>
   </div>

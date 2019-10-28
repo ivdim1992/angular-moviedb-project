@@ -22,7 +22,7 @@ export class MoviesEffects {
     ofType(fromMoviesActions.MoviesActionTypes.GET_POPULAR_MOVIES),
     switchMap(action => {
       return this._movieService.getPopularMovies(action['payload']).pipe(
-        map(movies => new fromMoviesActions.GetPopularMoviesSuccess(movies)),
+        map(movies => new fromMoviesActions.GetPopularMoviesSuccess({ popularMovies: movies })),
         catchError(errRes => handleError(errRes))
       );
     })
@@ -88,5 +88,5 @@ export class MoviesEffects {
     private _movieService: MovieService,
     private _userServie: UserService,
     private _store: Store<fromRouterSelectors.State>
-  ) {}
+  ) { }
 }

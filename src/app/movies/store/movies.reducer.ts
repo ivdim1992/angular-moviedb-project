@@ -1,10 +1,10 @@
 import { MovieDetails } from './../../shared/models/movie-details.model';
 import { Movie } from 'src/app/shared/models';
-
+import { EntityState, createEntityAdapter } from '@ngrx/entity';
 import * as fromMoviesActions from './movies.actions';
 
 export interface MovieState {
-  popularMovies: Movie[];
+  popularMovies: PopularMoviesState
   topRatedMovies: Movie[];
   movieDetails: MovieDetails;
   searchMovies: Movie[];
@@ -12,8 +12,20 @@ export interface MovieState {
   loading: boolean;
 }
 
+
+//         POPULAR MOVIES
+export interface PopularMoviesState extends EntityState<Movie> { }
+export const popularMoviesAdapter = createEntityAdapter<Movie>({})
+export const popularMoviesInitialState: PopularMoviesState = popularMoviesAdapter.getInitialState({})
+//         TOP RATED MOVIES
+export interface TopRatedMoviesState extends EntityState<Movie> { }
+export const topRatedMoviesAdapter = createEntityAdapter<Movie>({})
+export const topRatedMoviesInitialState: TopRatedMoviesState = popularMoviesAdapter.getInitialState({})
+
+
+
 const initialState: MovieState = {
-  popularMovies: null,
+  popularMovies: popularMoviesInitialState,
   topRatedMovies: null,
   movieDetails: null,
   searchMovies: null,
@@ -21,21 +33,18 @@ const initialState: MovieState = {
   loading: false
 };
 
+
 export function movieReducer(state = initialState, action: fromMoviesActions.MoviesActions) {
   switch (action.type) {
     case fromMoviesActions.MoviesActionTypes.GET_POPULAR_MOVIES:
-      return {
-        ...state,
-        page: action.payload,
-        loading: true
-      };
+      return { ...state, page: action.payload, loading: true }
 
     case fromMoviesActions.MoviesActionTypes.GET_POPULAR_MOVIES_SUCCESS:
       return {
         ...state,
-        popularMovies: state.popularMovies ? state.popularMovies.concat(action.payload) : action.payload,
-        loading: false
-      };
+        popularMovies: popularMoviesAdapter.addMany(action.payload.popularMovies, state.popularMovies)
+      }
+
 
     case fromMoviesActions.MoviesActionTypes.GET_TOP_RATED_MOVIES:
       return {

@@ -12,9 +12,9 @@ import * as fromMoviesActions from '../../store/movies.actions';
   styleUrls: ['./popular-movies.component.scss']
 })
 export class PopularMoviesComponent implements OnInit, OnDestroy {
-  constructor(private _store: Store<fromAppStore.AppState>) {}
+  constructor(private _store: Store<fromAppStore.AppState>) { }
 
-  popularMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectPopularMovies);
+  popularMovies$: Observable<Movie[]> = this._store.select(moviesSelector.seleselectPop);
   isLoading: boolean;
   subscription: Subscription;
   page: number;

@@ -1,6 +1,6 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import { Effect, Actions, ofType } from '@ngrx/effects';
+import { Effect, Actions, ofType, act } from '@ngrx/effects';
 import { switchMap, map, catchError, mergeMap, withLatestFrom } from 'rxjs/operators';
 
 import * as fromRouterSelectors from '../../store/index';
@@ -20,9 +20,9 @@ export class MoviesEffects {
   @Effect()
   getPopularMovies$ = this._actions$.pipe(
     ofType(fromMoviesActions.MoviesActionTypes.GET_POPULAR_MOVIES),
-    switchMap(action => {
-      return this._movieService.getPopularMovies(action['payload']).pipe(
-        map(movies => new fromMoviesActions.GetPopularMoviesSuccess(movies)),
+    switchMap((action: fromMoviesActions.GetPopularMovies) => {
+      return this._movieService.getPopularMovies(action.payload.page).pipe(
+        map(movies => new fromMoviesActions.GetPopularMoviesSuccess({ popularMovies: movies })),
         catchError(errRes => handleError(errRes))
       );
     })
@@ -31,9 +31,9 @@ export class MoviesEffects {
   @Effect()
   getTopRated = this._actions$.pipe(
     ofType(fromMoviesActions.MoviesActionTypes.GET_TOP_RATED_MOVIES),
-    switchMap(action => {
-      return this._movieService.getTopRatedMovies(action['payload']).pipe(
-        map(movies => new fromMoviesActions.GetTopRatedMoviesSuccess(movies)),
+    switchMap((action: fromMoviesActions.GetTopRatedMovies) => {
+      return this._movieService.getTopRatedMovies(action.payload.page).pipe(
+        map(movies => new fromMoviesActions.GetTopRatedMoviesSuccess({ topRatedMovies: movies })),
         catchError(errRes => handleError(errRes))
       );
     })
@@ -47,7 +47,7 @@ export class MoviesEffects {
       let query = routerParams.state.queryParams.search;
 
       return this._movieService.searchMovie(query).pipe(
-        map(movies => new fromMoviesActions.GetSearchedMoviesSuccess(movies)),
+        map(movies => new fromMoviesActions.GetSearchedMoviesSuccess({ searchedMovies: movies })),
         catchError(errRes => handleError(errRes))
       );
     })
@@ -61,7 +61,7 @@ export class MoviesEffects {
         .getFavoriteMovies()
         .pipe(
           map(
-            movies => new fromMoviesActions.GetFavoriteMoviesSuccess(movies),
+            movies => new fromMoviesActions.GetFavoriteMoviesSuccess({ favoriteMovies: movies }),
             catchError(errRes => handleError(errRes))
           )
         );
@@ -71,13 +71,10 @@ export class MoviesEffects {
   @Effect()
   getMovieDetails = this._actions$.pipe(
     ofType(fromMoviesActions.MoviesActionTypes.GET_MOVIE_DETAILS),
-    map((action: fromMoviesActions.GetMovieDetailsSuccess) => action.payload),
-    withLatestFrom(this._store.select(fromRouterSelectors.selectRouter)),
-    switchMap(([payload, routerParas]) => {
-      let id = routerParas.state.params.id;
-
+    switchMap((action: fromMoviesActions.GetMovieDetails) => {
+      const id = action.payload.movieId;
       return this._movieService.getMovieDetails(id).pipe(
-        map(movie => new fromMoviesActions.GetMovieDetailsSuccess(movie)),
+        map(movie => new fromMoviesActions.GetMovieDetailsSuccess({ movieDetails: movie })),
         catchError(errRes => handleError(errRes))
       );
     })

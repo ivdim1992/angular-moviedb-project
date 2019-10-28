@@ -40,4 +40,4 @@ import * as injectionTokens from './injection-token';
   exports: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

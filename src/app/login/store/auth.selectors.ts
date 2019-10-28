@@ -1,25 +1,24 @@
-import { createSelector } from '@ngrx/store';
-import * as fromAppStore from '../../store/store.reducer';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 import * as fromAuthReducer from '../store/auth.reducer';
 
-export const selectAuth = (state: fromAppStore.AppState) => state.auth;
+export const selectAuth = createFeatureSelector<fromAuthReducer.UserState>('auth');
 
 export const selectUser = createSelector(
   selectAuth,
-  (state: fromAuthReducer.UserState) => state.user
+  state => state.user
 );
 
 export const selectLoading = createSelector(
   selectAuth,
-  (state: fromAuthReducer.UserState) => state.loading
+  state => state.loading
 );
 
 export const selectAuthError = createSelector(
   selectAuth,
-  (state: fromAuthReducer.UserState) => state.authError
+  state => state.authError
 );
 
 export const selectIsLogged = createSelector(
   selectAuth,
-  (state: fromAuthReducer.UserState) => state.isLogged
+  state => state.isLogged
 );

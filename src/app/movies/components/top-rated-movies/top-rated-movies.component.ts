@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Movie } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
+
 import * as moviesSelector from '@movieStore/movies.selectors';
 import * as fromMoviesActions from '@movieStore/movies.actions';
 import * as fromAppStore from '@appStore/store.reducer';
@@ -11,27 +12,15 @@ import * as fromAppStore from '@appStore/store.reducer';
   templateUrl: './top-rated-movies.component.html',
   styleUrls: ['./top-rated-movies.component.scss']
 })
-export class TopRatedMoviesComponent implements OnInit, OnDestroy {
+export class TopRatedMoviesComponent implements OnInit {
   constructor(private _store: Store<fromAppStore.AppState>) {}
 
-  topRatedMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectTopRatedMovies);
-  isLoading: boolean;
-  subscription: Subscription;
-  page: number;
+  topRatedMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectAllTopRatedMovies);
+  isLoading$: Observable<boolean> = this._store.select(moviesSelector.selectLoadingProp);
 
-  ngOnInit() {
-    this.subscription = this._store.select(moviesSelector.selectLoadingProp).subscribe(loadingVal => {
-      this.isLoading = loadingVal;
-    });
-    this.page = 2;
-    this._store.dispatch(new fromMoviesActions.GetTopRatedMovies(this.page));
-  }
+  ngOnInit() {}
 
   onScroll() {
-    this._store.dispatch(new fromMoviesActions.GetTopRatedMovies(++this.page));
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this._store.dispatch(new fromMoviesActions.GetTopRatedMovies({ page: 2 }));
   }
 }

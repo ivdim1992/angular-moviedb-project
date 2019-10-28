@@ -21,31 +21,31 @@ export class GetFavoriteMovies implements Action {
 export class GetFavoriteMoviesSuccess implements Action {
   readonly type = MoviesActionTypes.GET_FAVORITE_MOVIES_SUCCESS;
 
-  constructor(public payload: Movie[]) {}
+  constructor(public payload: { favoriteMovies: Movie[] }) {}
 }
 
 export class GetPopularMovies implements Action {
   readonly type = MoviesActionTypes.GET_POPULAR_MOVIES;
 
-  constructor(public payload: number) {}
+  constructor(public payload: { page: number }) {}
 }
 
 export class GetPopularMoviesSuccess implements Action {
   readonly type = MoviesActionTypes.GET_POPULAR_MOVIES_SUCCESS;
 
-  constructor(public payload: Movie[]) {}
+  constructor(public payload: { popularMovies: Movie[] }) {}
 }
 
 export class GetTopRatedMovies implements Action {
   readonly type = MoviesActionTypes.GET_TOP_RATED_MOVIES;
 
-  constructor(public payload: number) {}
+  constructor(public payload: { page: number }) {}
 }
 
 export class GetTopRatedMoviesSuccess implements Action {
   readonly type = MoviesActionTypes.GET_TOP_RATED_MOVIES_SUCCESS;
 
-  constructor(public payload: Movie[]) {}
+  constructor(public payload: { topRatedMovies: Movie[] }) {}
 }
 
 export class GetSearchedMovies implements Action {
@@ -54,17 +54,19 @@ export class GetSearchedMovies implements Action {
 
 export class GetSearchedMoviesSuccess implements Action {
   readonly type = MoviesActionTypes.GET_SEARCHED_MOVIES_SUCCESS;
-  constructor(public payload: Movie[]) {}
+  constructor(public payload: { searchedMovies: Movie[] }) {}
 }
 
 export class GetMovieDetails implements Action {
   readonly type = MoviesActionTypes.GET_MOVIE_DETAILS;
+
+  constructor(public payload: { movieId: number }) {}
 }
 
 export class GetMovieDetailsSuccess implements Action {
   readonly type = MoviesActionTypes.GET_MOVIE_DETAILS_SUCCESS;
 
-  constructor(public payload: MovieDetails) {}
+  constructor(public payload: { movieDetails: MovieDetails }) {}
 }
 
 export type MoviesActions =

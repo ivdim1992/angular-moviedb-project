@@ -1,26 +1,29 @@
+import { Movie } from './../../../shared/models/movie.model';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { MovieDetails } from 'src/app/shared/models';
-import { MovieService } from '../../shared/services';
 import { trigger, transition, useAnimation } from '@angular/animations';
 import { bounceIn } from 'ng-animate';
+import { AppState } from '@appStore/store.reducer';
+import { Store } from '@ngrx/store';
+import * as fromMoviesActions from '@movieStore/movies.actions';
+import * as fromMoviesSelectors from '@movieStore/movies.selectors';
 
 export interface IMovieData {
-  id: string,
-  imagePath: string,
-  titke: string
+  id: string;
+  imagePath: string;
+  title: string;
 }
 
 @Component({
-  selector: 'moviedb-movie-details',
+  selector: 'moviedb-movie-details-modal',
   templateUrl: './movie-details-modal.component.html',
   styleUrls: ['./movie-details-modal.component.scss'],
   animations: [
     trigger('movieDetailsLoaded', [
       transition(
-        'false => true',
+        'true => false',
         useAnimation(bounceIn, {
           delay: 5000
         })
@@ -31,25 +34,16 @@ export interface IMovieData {
 export class MovieDetailsModalComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<MovieDetailsModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IMovieData,
-    private _movieService: MovieService
-  ) { }
+    @Inject(MAT_DIALOG_DATA) public data: Movie,
+    private _store: Store<AppState>
+  ) {}
 
-  private _destroyed$ = new Subject<boolean>();
-  movieGenres: string[];
-  movieDetails: MovieDetails;
-  movieDetailsLoaded: boolean = false;
+  selectedMovie$: Observable<MovieDetails> = this._store.select(fromMoviesSelectors.selectMovieDetails);
+  isLoading$: Observable<boolean> = this._store.select(fromMoviesSelectors.selectLoadingProp);
   btnText: string = 'View More';
 
   ngOnInit() {
-    this._movieService
-      .getMovieDetails(this.data['id'])
-      .pipe(takeUntil(this._destroyed$))
-      .subscribe(details => {
-        this.movieDetails = details;
-        this.movieGenres = details.genres.map(genres => genres.name);
-        this.movieDetailsLoaded = true;
-      });
+    this._store.dispatch(new fromMoviesActions.GetMovieDetails({ movieId: this.data.id }));
   }
 
   closeDialog() {

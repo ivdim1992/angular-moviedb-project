@@ -1,7 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Movie } from 'src/app/shared/models';
 import { Store } from '@ngrx/store';
+
 import * as moviesSelector from '@movieStore/movies.selectors';
 import * as fromMoviesActions from '@movieStore/movies.actions';
 import * as fromAppStore from '@appStore/store.reducer';
@@ -11,25 +12,16 @@ import * as fromAppStore from '@appStore/store.reducer';
   templateUrl: './popular-movies.component.html',
   styleUrls: ['./popular-movies.component.scss']
 })
-export class PopularMoviesComponent implements OnInit, OnDestroy {
+export class PopularMoviesComponent implements OnInit {
   constructor(private _store: Store<fromAppStore.AppState>) {}
 
-  popularMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectPopularMovies);
-  isLoading: Observable<boolean> = this._store.select(moviesSelector.selectLoadingProp);
-  subscription: Subscription;
-  page: number;
+  popularMovies$: Observable<Movie[]> = this._store.select(moviesSelector.selectAllPopularMovies);
 
-  ngOnInit() {
-    this.page = 2;
-    this._store.dispatch(new fromMoviesActions.GetPopularMovies(this.page));
-  }
+  isLoading$: Observable<boolean> = this._store.select(moviesSelector.selectLoadingProp);
+
+  ngOnInit() {}
 
   onScroll() {
-    console.log('on bottom');
-    this._store.dispatch(new fromMoviesActions.GetPopularMovies(++this.page));
-  }
-
-  ngOnDestroy() {
-    // this.subscription.unsubscribe();
+    this._store.dispatch(new fromMoviesActions.GetPopularMovies({ page: 2 }));
   }
 }

@@ -6,8 +6,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { StoreModule } from '@ngrx/store';
 
 import * as components from './components';
-import * as fromAppStore from '../store/store.reducer';
-import * as fromMoviesEffects from '@movieStore/movies.effects';
+import * as fromMovieReducer from './store/movies.reducer';
+import * as fromMoviesEffects from './store/movies.effects';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import * as fromMoviesEffects from '@movieStore/movies.effects';
     MoviesRoutingModule,
     SharedModule,
     InfiniteScrollModule,
-    StoreModule.forFeature('movies', fromAppStore.storeReducer.movies),
+    StoreModule.forFeature('movies', fromMovieReducer.movieReducer),
     EffectsModule.forFeature([fromMoviesEffects.MoviesEffects])
   ],
   exports: [components.MoviesComponent],

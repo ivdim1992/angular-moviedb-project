@@ -1,7 +1,7 @@
-<div *ngIf="(searchedMovies$ | async)?.length > 1; else loading">
+<div *ngIf="(searchedMovies$ | async)['searchedMovies']?.length > 1; else loading">
   <section class="searched-movies-container">
     <h3 mat-subheader class="top-rated-movies__header">Searched Movies:</h3>
-    <moviedb-list-items [items]="searchedMovies$ | async"></moviedb-list-items>
+    <moviedb-list-items [items]="(searchedMovies$ | async)['searchedMovies']"></moviedb-list-items>
   </section>
 </div>
 

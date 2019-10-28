@@ -26,7 +26,7 @@ export class MovieService {
       .pipe(map(input => input['results'].map(movies => new Movie(movies))));
   }
 
-  getMovieDetails(movieID: string): Observable<MovieDetails> {
+  getMovieDetails(movieID: number): Observable<MovieDetails> {
     const url = `${appConfig.BASE_URL}movie/${movieID}?`;
     return this._http.get<IMovieDetails>(url).pipe(map(movie => new MovieDetails(movie)));
   }

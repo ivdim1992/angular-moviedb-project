@@ -12,11 +12,11 @@ import * as fromAuthSelectors from '@authStore/auth.selectors';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private _store: Store<fromAppStore.AppState>) {}
+  constructor(private _store: Store<fromAppStore.AppState>) { }
 
   isLogged: Observable<boolean> = this._store.select(fromAuthSelectors.selectIsLogged);
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   logoutUser() {
     this._store.dispatch(new fromAuthActions.Logout());

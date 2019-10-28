@@ -1,9 +1,8 @@
 import { Store } from '@ngrx/store';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { Movie, MovieDetails } from 'src/app/shared/models';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { MovieDetails } from 'src/app/shared/models';
 
-import * as fromMoviesActions from '@movieStore/movies.actions';
 import * as moviesSelector from '@movieStore/movies.selectors';
 import * as fromAppStore from '@appStore/store.reducer';
 
@@ -12,21 +11,11 @@ import * as fromAppStore from '@appStore/store.reducer';
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss']
 })
-export class MovieDetailsComponent implements OnInit, OnDestroy {
+export class MovieDetailsComponent implements OnInit {
   movieDetails$: Observable<MovieDetails> = this._store.select(moviesSelector.selectMovieDetails);
-  isLoading: boolean;
-  subscription: Subscription;
+  isLoading: Observable<boolean> = this._store.select(moviesSelector.selectLoadingProp);
 
   constructor(private _store: Store<fromAppStore.AppState>) {}
 
-  ngOnInit() {
-    this.subscription = this._store.select(moviesSelector.selectLoadingProp).subscribe(loadingVal => {
-      this.isLoading = loadingVal;
-    });
-    this._store.dispatch(new fromMoviesActions.GetMovieDetails());
-  }
-
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+  ngOnInit() {}
 }

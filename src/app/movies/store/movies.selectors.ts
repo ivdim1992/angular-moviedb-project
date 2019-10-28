@@ -1,36 +1,51 @@
-import * as fromAppStore from '../../store/store.reducer';
 import * as fromMoviesReducer from './movies.reducer';
 
-import { createSelector } from '@ngrx/store';
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 
-export const selectMovies = (state: fromAppStore.AppState) => state.movies;
-
-export const selectPopularMovies = createSelector(
+export const selectMovies = createFeatureSelector<fromMoviesReducer.MovieState>('movies');
+// POPULAR MOVIES
+export const selectPopularMoviesState = createSelector(
   selectMovies,
-  (state: fromMoviesReducer.MovieState) => state.popularMovies
+  fromMoviesReducer.selectPopularMoviesState
+);
+
+export const selectAllPopularMovies = createSelector(
+  selectPopularMoviesState,
+  fromMoviesReducer.selectAllPopularMovies
+);
+
+//Top Rated Movies
+export const selectTopRatedMoviesState = createSelector(
+  selectMovies,
+  fromMoviesReducer.selectTopRatedMoviesState
+);
+
+export const selectAllTopRatedMovies = createSelector(
+  selectTopRatedMoviesState,
+  fromMoviesReducer.selectAllTopRatedMovies
 );
 
 export const selectTopRatedMovies = createSelector(
   selectMovies,
-  (state: fromMoviesReducer.MovieState) => state.topRatedMovies
+  state => state.topRatedMovies
 );
 
 export const selectSearchedMovies = createSelector(
   selectMovies,
-  (state: fromMoviesReducer.MovieState) => state.searchMovies
+  state => state.searchMovies
 );
 
 export const selectLoadingProp = createSelector(
   selectMovies,
-  (state: fromMoviesReducer.MovieState) => state.loading
+  state => state.loading
 );
 
 export const selectMovieDetails = createSelector(
   selectMovies,
-  (state: fromMoviesReducer.MovieState) => state.movieDetails
+  state => state.movieDetails
 );
 
 export const selectFavoriteMovies = createSelector(
   selectMovies,
-  (state: fromMoviesReducer.MovieState) => state.favoriteMovies
+  state => state.favoriteMovies
 );

@@ -13,13 +13,14 @@ import * as fromAppStore from '@appStore/store.reducer';
   styleUrls: ['./my-list.component.scss']
 })
 export class MyListComponent implements OnInit {
-  myFavoriteMovies$: Observable<Movie[]> = this._store.select(fromMoviesSelectors.selectFavoriteMovies);
+  myFavoriteMovies$: Observable<Movie[]> = this._store.select(fromMoviesSelectors.selectAllFavoriteMovies);
   imagePath: string;
 
   constructor(private _store: Store<fromAppStore.AppState>) {}
 
   ngOnInit() {
     this._store.dispatch(new fromMoviesActions.GetFavoriteMovies());
+
     this.imagePath = 'https://image.tmdb.org/t/p/w92';
   }
 }

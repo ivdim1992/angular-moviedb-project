@@ -7,6 +7,8 @@ import { MovieDetailsModalComponent } from 'src/app/movies/components';
 import { Observable } from 'rxjs';
 import * as fromAppStore from '@appStore/store.reducer';
 import * as fromAuthSelectors from '@authStore/auth.selectors';
+import * as fromMoviesActions from '@movieStore/movies.actions';
+import * as fromMovieSelectors from '@movieStore/movies.selectors';
 
 @Component({
   selector: 'moviedb-movie-card',
@@ -16,9 +18,9 @@ import * as fromAuthSelectors from '@authStore/auth.selectors';
 export class MovieCardComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
-    private _snackBar: SnackBarService,
+    private _store: Store<fromAppStore.AppState>,
     private _userService: UserService,
-    private _store: Store<fromAppStore.AppState>
+    private _snackbar: SnackBarService
   ) {}
 
   @Input() movie: Movie;
@@ -38,9 +40,10 @@ export class MovieCardComponent implements OnInit {
   }
 
   addToFavorites() {
+    // this._store.dispatch(new fromMoviesActions.AddFavoriteMovie({ movieId: this.movie.id }));
     this._userService.addToFavorites(this.movie.id).subscribe(res => {
       if (res['status_message']) {
-        this._snackBar.open({
+        this._snackbar.open({
           message: 'Successfuly added to favorites'
         });
       }

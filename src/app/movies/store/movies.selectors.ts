@@ -25,9 +25,20 @@ export const selectAllTopRatedMovies = createSelector(
   fromMoviesReducer.selectAllTopRatedMovies
 );
 
-export const selectTopRatedMovies = createSelector(
+//FAVORITE MOVIES
+export const selectFavoriteMoviesState = createSelector(
   selectMovies,
-  state => state.topRatedMovies
+  fromMoviesReducer.selectFavoriteMoviesState
+);
+
+export const selectAllFavoriteMovies = createSelector(
+  selectFavoriteMoviesState,
+  fromMoviesReducer.selectAllFavoriteMovies
+);
+
+export const selectFavoriteMoviesIds = createSelector(
+  selectFavoriteMoviesState,
+  fromMoviesReducer.favoriteMoviesIds
 );
 
 export const selectSearchedMovies = createSelector(

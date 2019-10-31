@@ -1,14 +1,14 @@
 import { Store } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import { Effect, Actions, ofType, act } from '@ngrx/effects';
-import { switchMap, map, catchError, mergeMap, withLatestFrom } from 'rxjs/operators';
+import { Effect, Actions, ofType } from '@ngrx/effects';
+import { switchMap, map, catchError, withLatestFrom } from 'rxjs/operators';
 
 import * as fromRouterSelectors from '../../store/index';
 import * as fromMoviesActions from './movies.actions';
 
 import { of } from 'rxjs';
 import { MovieService } from '../shared/services';
-import { UserService } from 'src/app/shared/services';
+import { UserService, SnackBarService } from 'src/app/shared/services';
 
 const handleError = (errorRes: any) => {
   console.error(errorRes);
@@ -56,7 +56,7 @@ export class MoviesEffects {
   @Effect()
   getFavoriteMovies = this._actions$.pipe(
     ofType(fromMoviesActions.MoviesActionTypes.GET_FAVORITE_MOVIES),
-    switchMap(() => {
+    switchMap((action: fromMoviesActions.GetFavoriteMovies) => {
       return this._userServie
         .getFavoriteMovies()
         .pipe(
@@ -84,6 +84,7 @@ export class MoviesEffects {
     private _actions$: Actions,
     private _movieService: MovieService,
     private _userServie: UserService,
-    private _store: Store<fromRouterSelectors.State>
+    private _store: Store<fromRouterSelectors.State>,
+    private _snackBar: SnackBarService
   ) {}
 }

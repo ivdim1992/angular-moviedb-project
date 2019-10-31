@@ -8,25 +8,44 @@ export interface MovieState {
   topRatedMovies: TopRatedMoviesState;
   movieDetails: MovieDetails;
   searchMovies: Movie[];
-  favoriteMovies: Movie[];
+  favoriteMovies: FavoriteMoviesState;
   loading: boolean;
+}
+
+export function sortById(m1: Movie, m2: Movie) {
+  const compare = m1.id - m2.id;
+
+  if (compare > 0) {
+    return 1;
+  } else if (compare < 0) {
+    return -1;
+  } else return 0;
 }
 
 //         POPULAR MOVIES
 export interface PopularMoviesState extends EntityState<Movie> {}
-export const popularMoviesAdapter = createEntityAdapter<Movie>({});
+export const popularMoviesAdapter = createEntityAdapter<Movie>({
+  sortComparer: sortById
+});
 export const popularMoviesInitialState: PopularMoviesState = popularMoviesAdapter.getInitialState({});
 //         TOP RATED MOVIES
 export interface TopRatedMoviesState extends EntityState<Movie> {}
-export const topRatedMoviesAdapter = createEntityAdapter<Movie>({});
+export const topRatedMoviesAdapter = createEntityAdapter<Movie>({
+  sortComparer: sortById
+});
 export const topRatedMoviesInitialState: TopRatedMoviesState = popularMoviesAdapter.getInitialState({});
+
+// FAVORITE MOVIES
+export interface FavoriteMoviesState extends EntityState<Movie> {}
+export const favoriteMoviesAdapter = createEntityAdapter<Movie>({});
+export const favoriteMoviesInitialState: FavoriteMoviesState = favoriteMoviesAdapter.getInitialState({});
 
 const initialState: MovieState = {
   popularMovies: popularMoviesInitialState,
   topRatedMovies: topRatedMoviesInitialState,
   movieDetails: null,
   searchMovies: null,
-  favoriteMovies: null,
+  favoriteMovies: favoriteMoviesInitialState,
   loading: false
 };
 
@@ -85,12 +104,13 @@ export function movieReducer(state = initialState, action: fromMoviesActions.Mov
     case fromMoviesActions.MoviesActionTypes.GET_FAVORITE_MOVIES:
       return {
         ...state,
-        loading: false
+        loading: true
       };
+
     case fromMoviesActions.MoviesActionTypes.GET_FAVORITE_MOVIES_SUCCESS:
       return {
         ...state,
-        favoriteMovies: action.payload,
+        favoriteMovies: favoriteMoviesAdapter.addAll(action.payload.favoriteMovies, state.favoriteMovies),
         loading: false
       };
 
@@ -108,3 +128,9 @@ export const {
   selectIds: topRatedMoviesIds,
   selectAll: selectAllTopRatedMovies
 } = topRatedMoviesAdapter.getSelectors();
+// FAVORITE MOVIES
+export const selectFavoriteMoviesState = (state: MovieState) => state.favoriteMovies;
+export const {
+  selectIds: favoriteMoviesIds,
+  selectAll: selectAllFavoriteMovies
+} = favoriteMoviesAdapter.getSelectors();

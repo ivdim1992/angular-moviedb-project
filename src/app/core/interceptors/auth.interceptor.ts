@@ -23,6 +23,7 @@ export class AuthInterceptor {
       let reqCloned = req.clone({
         params: newParams
       });
+
       return next.handle(reqCloned);
     }
   }
